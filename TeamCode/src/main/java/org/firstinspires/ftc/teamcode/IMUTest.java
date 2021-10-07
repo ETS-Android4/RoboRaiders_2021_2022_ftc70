@@ -103,6 +103,8 @@ public class IMUTest extends LinearOpMode
 
         // Loop and update the dashboard
         while (opModeIsActive()) {
+
+            // Possibly change this - need to study how this code works
             telemetry.update();
         }
     }
