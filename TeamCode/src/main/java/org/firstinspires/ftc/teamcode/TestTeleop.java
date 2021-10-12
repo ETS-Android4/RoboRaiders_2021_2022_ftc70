@@ -17,16 +17,18 @@ import com.qualcomm.robotcore.util.Range;
 // in the drop down list on the Driver Station phone to be chosen to run.
 //@Disabled - temporarily takes this op mode off of the drop down list until it is
 // commented out.
-@TeleOp
-@Disabled
+@TeleOp(name = "testleOP")
+//@Disabled
 
 public class TestTeleop extends OpMode {
 
 
-    DcMotor // name of motor
-    Servo   // name of servo
-
-
+    DcMotor thatmotor = null; // name of motor
+    Servo Smartroboserbo = null;   // name of servo
+    boolean currStateB =false;
+    boolean currStateX =false;
+    boolean prevStateB =false;
+    boolean prevStateX =false;
     /**
      * init() - initialization routine that is executed when the opmode is first choosen
       */
@@ -35,8 +37,8 @@ public class TestTeleop extends OpMode {
 
         // Get from the hardware map the motor (dcMotor) and the servo
 
-        // name of motor = hardwareMap.dcMotor.get("motor name from control hub");
-        // name of servo = hardwareMap.get(Servo.class, "servo name from control hub");
+       thatmotor = hardwareMap.dcMotor.get("thatmotor");
+       Smartroboserbo = hardwareMap.get(Servo.class, "Smartroboserbo");
 
     }
 
@@ -49,23 +51,35 @@ public class TestTeleop extends OpMode {
         // get the gamepad input...there are two gamepads, 1 and 2, for this we will use gamepad1
         // we can use either of the sticks to be the power that we will set the motor to, then
         // call the setMotorPower method to set the power to the motor
-
+        double  motorpower;
+        motorpower = -gamepad1.right_stick_y;
+        setMotorPower(motorpower);
 
         // get the gamepad input for for buttons that will be used to apply a position to a
         // servo.  For this we will use button a and b.  Button "a" will set the position to 1.0
         // and button "b" will set the position to 0.0.
-        /*
-        currStateA = gamepad2.a;
-        if (currStateA && currStateA != prevStateA) {
+
+        currStateB = gamepad1.b;
+        if (currStateB && currStateB != prevStateB) {
 
            setServoPosition(1.0);
-            prevStateA = currStateA;
+            prevStateB = currStateB;
         }
-        else if (!currStateA && currStateA != prevStateA) {
+        else if (!currStateB && currStateB != prevStateB) {
 
-            prevStateA = currStateA;
+            prevStateB = currStateB;
         }
-         */
+
+        currStateX = gamepad1.x;
+        if (currStateX && currStateX != prevStateX) {
+
+            setServoPosition(1.0);
+            prevStateX = currStateX;
+        }
+        else if (!currStateX && currStateX != prevStateX) {
+
+            prevStateX = currStateX;
+        }
     }
 
     /**
@@ -75,7 +89,7 @@ public class TestTeleop extends OpMode {
     public void setMotorPower(double power) {
 
         // set the power (setPower) for the motor
-
+        thatmotor.setPower(power);
 
     }
 
