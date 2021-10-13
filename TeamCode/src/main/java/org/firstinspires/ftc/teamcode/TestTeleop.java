@@ -60,26 +60,30 @@ public class TestTeleop extends OpMode {
         // and button "b" will set the position to 0.0.
 
         currStateB = gamepad1.b;
-        if (currStateB && currStateB != prevStateB) {
+        if (currStateB) setServoPosition(1.0);
 
-           setServoPosition(1.0);
-            prevStateB = currStateB;
-        }
-        else if (!currStateB && currStateB != prevStateB) {
 
-            prevStateB = currStateB;
-        }
+//        if (currStateB && currStateB != prevStateB) {
+//
+//           setServoPosition(1.0);
+//            prevStateB = currStateB;
+//        }
+//        else if (!currStateB && currStateB != prevStateB) {
+//
+//            prevStateB = currStateB;
+//        }
 
         currStateX = gamepad1.x;
-        if (currStateX && currStateX != prevStateX) {
-
-            setServoPosition(1.0);
-            prevStateX = currStateX;
-        }
-        else if (!currStateX && currStateX != prevStateX) {
-
-            prevStateX = currStateX;
-        }
+        if (currStateX) setServoPosition(0.0);
+//        if (currStateX && currStateX != prevStateX) {
+//
+//            setServoPosition(1.0);
+//            prevStateX = currStateX;
+//        }
+//        else if (!currStateX && currStateX != prevStateX) {
+//
+//            prevStateX = currStateX;
+//        }
     }
 
     /**
@@ -100,6 +104,7 @@ public class TestTeleop extends OpMode {
     public void setServoPosition(double position) {
 
         // set the servo position (setPosition) for the servo
+        Smartroboserbo.setPosition(position);
     }
 
 
