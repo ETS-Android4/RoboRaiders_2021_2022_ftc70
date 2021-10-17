@@ -31,6 +31,7 @@ public class SensorTests extends OpMode {
         telemetry.addData("Touch: ", touch_sensor.getValue());
         telemetry.addData("Range in mm: ",range_sensor.getDistance(DistanceUnit.MM));
         telemetry.addData("Range in inches: ",range_sensor.getDistance(DistanceUnit.INCH));
+        telemetry.addData("Range in inches: ",range_sensor.getDistance(DistanceUnit.CM));
         telemetry.update();
 
 
