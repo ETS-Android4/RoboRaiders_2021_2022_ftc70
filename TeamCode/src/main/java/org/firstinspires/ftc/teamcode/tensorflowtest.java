@@ -88,6 +88,7 @@ public class tensorflowtest extends LinearOpMode {
     private static final String VUFORIA_KEY =
             "AQtKTtX/////AAABmfCVDnG3Wkl+t3/cSsQi4wJ8MamIxi85/5YwDHuFQouE5izFNRrr+wOX79YUBRgu+LlkdG6uZbafFtF7AvVOZk/FxEu9b6izaShrRW0E73hnbiDRYAaXKA7LKcL8zCbIHaceDE0rx2pN3824HtsvNwaHWXdW7vOl3Jbxs94pRt1SLHxKNot3vIbuT4j6leOoYYiN+ZAQ7q/CuuUnEbkqUp9fCr9XsHUKgEzr36Hm+zGz+eW2F20zuPsI7w4DSQQXhCIjObhseLDJliVXJ6nrq53uKVTEppnm3YcgS5PzCs7aN820GLqFi2BoKo80KPLep7GrNuOzxK3W3xPDbJpKJn2dCxNSgZc0EwuvRtv+huOM";
 
+    String duckLocation = new String("left");
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
      * localization engine.
@@ -145,16 +146,19 @@ public class tensorflowtest extends LinearOpMode {
                                       recognition.getLeft(), recognition.getTop());
                               telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
                                       recognition.getRight(), recognition.getBottom());
-                              if (recognition.getLeft() > 500.) {
-                                  telemetry.addLine("right spot");
-                              } else if (recognition.getLeft() > 200.) {
-                                  telemetry.addLine("middle spot");
+                              if (recognition.getLeft() > 450.) {
+                                  //telemetry.addLine("right spot");
+                                  duckLocation = "right";
+                              } else if (recognition.getLeft() > 150.) {
+                                  //telemetry.addLine("middle spot");
+                                  duckLocation = "middle";
                               }
-                          }
                           }
                         i++;
                       }
+                      telemetry.addLine(duckLocation);
                       telemetry.update();
+                      duckLocation = "left";
                     }
                 }
             }
