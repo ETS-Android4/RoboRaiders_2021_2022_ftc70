@@ -39,8 +39,8 @@ public class TestBotTeleop extends OpMode {
           First get the value for the left Y and right Y sticks
           ---------------------------------------------------------------------------------*/
 
-        double left  = -gamepad1.left_stick_y;
-        double right = -gamepad1.right_stick_y;
+        double left  = gamepad1.left_stick_y;
+        double right = gamepad1.right_stick_y;
 
         /* Insure that the values from the gamepad for left and right will
            always be between -1.0 and 1.0.  This is done since motor powers
