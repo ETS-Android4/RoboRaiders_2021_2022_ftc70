@@ -99,3 +99,7 @@ public class pidauto extends LinearOpMode {
             direction = pidUdpReceiver.getDirection();
         }
 }
+// this is where we are with PID, these are our best values.
+//P: .003
+//I: .068
+//D: .045
