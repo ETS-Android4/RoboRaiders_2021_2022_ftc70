@@ -53,40 +53,38 @@ public class pidauto extends LinearOpMode {
             // set the transmission interval to 50 milliseconds
             telemetry.setMsTransmissionInterval(50);
 
+            updatePIDCoefficients();
+
+            myRRPID.setCoeffecients(kP,kI,kD);
+
+            telemetry.addLine("Steve's PID Tuner");
+            telemetry.addData("kP", String.valueOf(kP));
+            telemetry.addData("kI", String.valueOf(kI));
+            telemetry.addData("kD", String.valueOf(kD));
+            telemetry.addData("Degrees", String.valueOf(degrees));
+
+            if (direction == 0.0) {telemetry.addLine("Turn Direction - Right");}
+            else {telemetry.addLine("Turn Direction - Left");}
+            telemetry.update();
+
+
             // Wait for start to be pushed
             waitForStart();
 
+            double numofticks = stevesRobot.driveTrainCalculateCounts(24);
+            stevesRobot.runWithEncoders();
+            power = myRRPID.pidWithCounts(numofticks, 0.0);
+            stevesRobot.setDriveMotorPower(power, power, power, power);
 
-                updatePIDCoefficients();
-
-                myRRPID.setCoeffecients(kP,kI,kD);
-
-                telemetry.addLine("Steve's PID Tuner");
-                telemetry.addData("kP", String.valueOf(kP));
-                telemetry.addData("kI", String.valueOf(kI));
-                telemetry.addData("kD", String.valueOf(kD));
-                telemetry.addData("Degrees", String.valueOf(degrees));
-
-                if (direction == 0.0) {telemetry.addLine("Turn Direction - Right");}
-                else {telemetry.addLine("Turn Direction - Left");}
-                telemetry.update();
-
-                double numofticks = stevesRobot.driveTrainCalculateCounts(24);
-                stevesRobot.runWithEncoders();
-                power = myRRPID.pidWithCounts(numofticks, 0.0);
+            while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks) {
+                power = myRRPID.pidWithCounts(numofticks, stevesRobot.getSortedEncoderCount());
                 stevesRobot.setDriveMotorPower(power, power, power, power);
 
-                while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks) {
-
-                    power = myRRPID.pidWithCounts(numofticks, stevesRobot.getSortedEncoderCount());
-                    stevesRobot.setDriveMotorPower(power, power, power, power);
-
-                    telemetry.addData("number of ticks: ", stevesRobot.getSortedEncoderCount());
-                    telemetry.update();
-                }
-                stevesRobot.setDriveMotorPower(0, 0, 0, 0);
-                telemetry.addData("setting power to zero", true);
-
+                telemetry.addData("number of ticks: ", stevesRobot.getSortedEncoderCount());
+                telemetry.update();
+            }
+            stevesRobot.setDriveMotorPower(0, 0, 0, 0);
+            telemetry.addData("setting power to zero", true);
             pidUdpReceiver.shutdown();
         }
 
