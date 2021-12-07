@@ -5,18 +5,18 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
-import RoboRaiders.Robot.NostromoBot;
+import RoboRaiders.Robot.QueenLizzy26;
 
 /**
  *  Created by Steve Kocik
  */
 
 @TeleOp(name="Teleop: Lets Drive Normal")
-@Disabled
+//@Disabled
 
 public class QueenLizzy26Teleop extends OpMode {
 
-    public NostromoBot robot = new NostromoBot();
+    public QueenLizzy26 robot = new QueenLizzy26();
 
     /* Define variables */
     float LeftBack;   // Power for left back motor
@@ -24,37 +24,8 @@ public class QueenLizzy26Teleop extends OpMode {
     float LeftFront;  // Power for left front motor
     float RightFront; // Power for right front motor
     float maxpwr;     // Maximum power of the four motors
-    float lander;
-    float collection;
-    double powerFactor = 1;
-    public boolean currStateRightBumper1 = false;
-    public boolean prevStateRightBumper1 = false;
-    public boolean currStateLeftBumper1  = false;
-    public boolean prevStateLeftBumper1  = false;
-    public boolean currStateRightTrigger = false;
-    public boolean prevStateRightTrigger = false;
-    public boolean currStateLeftTrigger  = false;
-    public boolean prevStateLeftTrigger  = false;
-    public boolean currStateRightDpad = false;
-    public boolean prevStateRightDpad = false;
-    public boolean currStateLeftDpad = false;
-    public boolean prevStateLeftDpad = false;
-    int timesPivoted = 0;
-    public boolean currStateY = false;
-    public boolean prevStateY = false;
-    public boolean currStateX = false;
-    public boolean prevStateX = false;
-    public boolean currStateB = false;
-    public boolean prevStateB = false;
-    public boolean currStateA = false;
-    public boolean prevStateA = false;
-    public boolean currStateDPadUp = false;
-    public boolean currStateDPadDown = false;
-    public String intakeStatus = null;
-    public String dumperStatus = null;
-    public String collectionStatus = null;
-    public String intakeDoorStatus = null;
-    public String sliderStatus = null;
+
+
 
     @Override
     public void init() {
