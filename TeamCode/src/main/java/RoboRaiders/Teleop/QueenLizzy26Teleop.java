@@ -11,12 +11,16 @@ import RoboRaiders.Robot.QueenLizzy26;
  *  Created by Steve Kocik
  */
 
-@TeleOp(name="Teleop: Lets Drive Normal")
+@TeleOp(name="Teleop: queenLizzy26")
 //@Disabled
 
 public class QueenLizzy26Teleop extends OpMode {
 
+    public boolean halfSpeed = gamepad1.dpad_down;
+
     public QueenLizzy26 robot = new QueenLizzy26();
+
+
 
     /* Define variables */
     float LeftBack;   // Power for left back motor
@@ -25,6 +29,7 @@ public class QueenLizzy26Teleop extends OpMode {
     float RightFront; // Power for right front motor
     float maxpwr;     // Maximum power of the four motors
 
+    public boolean prevStateDpadD = false;
 
 
     @Override
@@ -51,7 +56,7 @@ public class QueenLizzy26Teleop extends OpMode {
         LeftFront = -gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x;
         RightFront = -gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x;
 
-
+        //We are normalizing the motor power
 
         maxpwr = findMaxPower(LeftBack, LeftFront, RightBack, RightFront);
 
@@ -65,11 +70,24 @@ public class QueenLizzy26Teleop extends OpMode {
         LeftFront = (float) scaleInput(LeftFront);
         RightFront = (float) scaleInput(RightFront);
 
+        if(gamepad1.dpad_down == true || prevStateDpadD == true){
+            prevStateDpadD = true;
+            LeftBack *= .5;
+            RightBack *= .5;
+            LeftFront *= .5;
+            RightFront *= .5;
+        }
+        if(gamepad1.dpad_up == true){
+
+        }
+        if(gamepad1.dpad_down == true && prevStateDpadD == true){
+            prevStateDpadD = false
+
+        }
         robot.setDriveMotorPower(LeftFront * 0.95,
                 RightFront * 0.95,
                 LeftBack * 0.95,
                 RightBack * 0.95);
-
 
 
 
