@@ -23,14 +23,15 @@ public class QueenLizzy26Teleop extends OpMode {
 
 
     /* Define variables */
-    float LeftBack;   // Power for left back motor
-    float RightBack;  // Power for right back motor
-    float LeftFront;  // Power for left front motor
-    float RightFront; // Power for right front motor
-    float maxpwr;     // Maximum power of the four motors
+    double LeftBack;   // Power for left back motor
+    double RightBack;  // Power for right back motor
+    double LeftFront;  // Power for left front motor
+    double RightFront; // Power for right front motor
+    double maxpwr;     // Maximum power of the four motors
+    double powermultiplyer = 1.0;
 
     public boolean prevStateDpadD = false;
-
+    public boolean curStateDpadD = false;
 
     @Override
     public void init() {
@@ -56,6 +57,7 @@ public class QueenLizzy26Teleop extends OpMode {
         LeftFront = -gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x;
         RightFront = -gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x;
 
+        curStateDpadD = gamepad1.dpad_down;
         //We are normalizing the motor power
 
         maxpwr = findMaxPower(LeftBack, LeftFront, RightBack, RightFront);
@@ -70,24 +72,24 @@ public class QueenLizzy26Teleop extends OpMode {
         LeftFront = (float) scaleInput(LeftFront);
         RightFront = (float) scaleInput(RightFront);
 
-        if(gamepad1.dpad_down == true || prevStateDpadD == true){
+        if((curStateDpadD == true && prevStateDpadD == false) || (curStateDpadD == false && prevStateDpadD == true)){
             prevStateDpadD = true;
-            LeftBack *= .5;
-            RightBack *= .5;
-            LeftFront *= .5;
-            RightFront *= .5;
-        }
-        if(gamepad1.dpad_up == true){
+            powermultiplyer = .5;
 
+            telemetry.addData("Motors are set to: Half Power", true);
+            telemetry.update();
         }
-        if(gamepad1.dpad_down == true && prevStateDpadD == true){
-            prevStateDpadD = false
 
+        else if(curStateDpadD == true && prevStateDpadD == true){
+            prevStateDpadD = false;
+            powermultiplyer = 1.0;
+            telemetry.addData("Motors are set to: Full power", true);
+            telemetry.update();
         }
-        robot.setDriveMotorPower(LeftFront * 0.95,
-                RightFront * 0.95,
-                LeftBack * 0.95,
-                RightBack * 0.95);
+        robot.setDriveMotorPower(LeftFront * 0.95 * powermultiplyer,
+                RightFront * 0.95 * powermultiplyer,
+                LeftBack * 0.95 * powermultiplyer,
+                RightBack * 0.95 * powermultiplyer);
 
 
 
@@ -203,11 +205,11 @@ public class QueenLizzy26Teleop extends OpMode {
      * @return maximum power of the four values
      * <B>Author(s):</B> Jason Sember and Steeeve
      */
-    float findMaxPower(float pwr1, float pwr2, float pwr3, float pwr4) {
+    double findMaxPower(double pwr1, double pwr2, double pwr3, double pwr4) {
 
-        float maxpwrA = Math.max(Math.abs(pwr1), Math.abs(pwr2));
-        float maxpwrB = Math.max(Math.abs(pwr3), Math.abs(pwr4));
-        float maxpwr = Math.max(Math.abs(maxpwrA), Math.abs(maxpwrB));
+        double maxpwrA = Math.max(Math.abs(pwr1), Math.abs(pwr2));
+        double maxpwrB = Math.max(Math.abs(pwr3), Math.abs(pwr4));
+        double maxpwr = Math.max(Math.abs(maxpwrA), Math.abs(maxpwrB));
 
         if (maxpwr > 1.0) {
 
