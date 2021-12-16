@@ -1,9 +1,7 @@
 package RoboRaiders.Teleop;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.Range;
 
 import RoboRaiders.Robot.QueenLizzy26;
 
@@ -15,8 +13,6 @@ import RoboRaiders.Robot.QueenLizzy26;
 //@Disabled
 
 public class QueenLizzy26Teleop extends OpMode {
-
-    public boolean halfSpeed = gamepad1.dpad_down;
 
     public QueenLizzy26 robot = new QueenLizzy26();
 
@@ -30,8 +26,8 @@ public class QueenLizzy26Teleop extends OpMode {
     double maxpwr;     // Maximum power of the four motors
     double powermultiplyer = 1.0;
 
-    public boolean prevStateDpadD = false;
-    public boolean curStateDpadD = false;
+    public boolean prevStateRightBumper = false;
+    public boolean curStateRightBumper = false;
 
     @Override
     public void init() {
@@ -53,11 +49,11 @@ public class QueenLizzy26Teleop extends OpMode {
 
         // "Mecanum Drive" functionality
         LeftBack = -gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x;
-        RightBack = -gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x;
+        RightBack = gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x;
         LeftFront = -gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x;
-        RightFront = -gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x;
+        RightFront = gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x;
 
-        curStateDpadD = gamepad1.dpad_down;
+        curStateRightBumper = gamepad1.right_bumper;
         //We are normalizing the motor power
 
         maxpwr = findMaxPower(LeftBack, LeftFront, RightBack, RightFront);
@@ -72,24 +68,35 @@ public class QueenLizzy26Teleop extends OpMode {
         LeftFront = (float) scaleInput(LeftFront);
         RightFront = (float) scaleInput(RightFront);
 
-        if((curStateDpadD == true && prevStateDpadD == false) || (curStateDpadD == false && prevStateDpadD == true)){
-            prevStateDpadD = true;
+        //This toggles on the halving of the power either when its pressed down and it wasn't previously pressed, or when it wasn't pressed but was previously pressed
+        if((curStateRightBumper == true && prevStateRightBumper == false) || (curStateRightBumper == false && prevStateRightBumper == true)){
+            prevStateRightBumper = true;
             powermultiplyer = .5;
 
-            telemetry.addData("Motors are set to: Half Power", true);
-            telemetry.update();
-        }
+            telemetry.addLine().addData("Motors are set to: Half Power", true);
 
-        else if(curStateDpadD == true && prevStateDpadD == true){
-            prevStateDpadD = false;
+        }
+        //This is to toggles off the halving of the power
+        else if(curStateRightBumper == true && prevStateRightBumper == true){
+            prevStateRightBumper = false;
             powermultiplyer = 1.0;
-            telemetry.addData("Motors are set to: Full power", true);
-            telemetry.update();
+
+            telemetry.addLine().addData("Motors are set to: Half power", false);
         }
         robot.setDriveMotorPower(LeftFront * 0.95 * powermultiplyer,
                 RightFront * 0.95 * powermultiplyer,
                 LeftBack * 0.95 * powermultiplyer,
                 RightBack * 0.95 * powermultiplyer);
+
+        telemetry.addLine().addData("Left Front:", LeftFront * 0.95 * powermultiplyer);
+        telemetry.addLine().addData("Right Front", RightFront * 0.95 * powermultiplyer);
+        telemetry.addLine().addData("Left Rear", LeftBack * 0.95 * powermultiplyer);
+        telemetry.addLine().addData("Right Rear", RightBack * 0.95 * powermultiplyer);
+
+        telemetry.addLine().addData("right stick X:", gamepad1.right_stick_x);
+        telemetry.addLine().addData("left stick X:", gamepad1.left_stick_x);
+        telemetry.addLine().addData("left stick Y:", gamepad1.left_stick_y);
+        telemetry.update();
 
 
 

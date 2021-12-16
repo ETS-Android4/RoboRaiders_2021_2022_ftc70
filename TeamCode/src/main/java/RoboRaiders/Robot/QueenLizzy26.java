@@ -63,9 +63,9 @@ public class QueenLizzy26 {
         rRMotor = hwMap.get(DcMotor.class, "rRMotor");
 
         // Defines the directions the motors will spin
-        lFMotor.setDirection(DcMotor.Direction.REVERSE);
+        lFMotor.setDirection(DcMotor.Direction.FORWARD);
         rFMotor.setDirection(DcMotor.Direction.FORWARD);
-        lRMotor.setDirection(DcMotor.Direction.REVERSE);
+        lRMotor.setDirection(DcMotor.Direction.FORWARD);
         rRMotor.setDirection(DcMotor.Direction.FORWARD);
 
         lFMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
