@@ -18,6 +18,7 @@ public class QueenLizzy26 {
     public DcMotor rFMotor = null;
     public DcMotor lRMotor = null;
     public DcMotor rRMotor = null;
+    public DcMotor cSMotor = null;
 
 
     public BNO055IMU imu;
@@ -61,6 +62,7 @@ public class QueenLizzy26 {
         rFMotor = hwMap.get(DcMotor.class, "rFMotor");
         lRMotor = hwMap.get(DcMotor.class, "lRMotor");
         rRMotor = hwMap.get(DcMotor.class, "rRMotor");
+        cSMotor = hwMap.get(DcMotor.class, "cSMotor");
 
         // Defines the directions the motors will spin
         lFMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -73,12 +75,12 @@ public class QueenLizzy26 {
         lRMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rRMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        //have the motors on the drivetrain break here.
         // Set all motors to zero power
         rFMotor.setPower(0.0);
         lFMotor.setPower(0.0);
         rRMotor.setPower(0.0);
         lRMotor.setPower(0.0);
+        cSMotor.setPower(0.0);
 
         // Stop and reset encoders
         resetEncoders();
@@ -89,6 +91,7 @@ public class QueenLizzy26 {
         rFMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lRMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rRMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        cSMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize sensors
         imu = hwMap.get(BNO055IMU.class, "imu");
@@ -254,15 +257,83 @@ public class QueenLizzy26 {
     //
     //**********************************************************************************************
 
+    //**********************************************************************************************
+    //
+    // CAROUSEL MOTOR METHODS
+    //
+    //**********************************************************************************************
+    /**
+     * This method will set the power for the carousel motor
+     *
+     * @param carousel power setting for the carousel motor
+     */
+    public void setCarouselMotorPower(double carousel) {
 
+        cSMotor.setPower(carousel);
+
+
+    }
+    /**
+     * Sets the target encoder value for the carousel motor
+     ** @param encoderPosition
+     */
+    public void setCSMotorTargetPosition(int encoderPosition){
+        cSMotor.setTargetPosition(encoderPosition);
+
+    }
+
+    /**
+     * This method will set the mode of the drive carousel motor to run using encoder
+     */
+    public void csRunWithEncoders() {
+
+        cSMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    /**
+     * This method will set the mode of the drive carousel motor to RUN_TO_POSITION
+     */
+    public void csRunWithEncodersSTP() {
+        cSMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+    }
+
+    /**
+     * This method will set the mode of the drive carousel motor to run without encoder
+     */
+    public void csRunWithoutEncoders() {
+
+        cSMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+    }
+
+    /**
+     * This will set the mode of the carousel train motor to STOP_AND_RESET_ENCODER, which will zero
+     * the encoder count but also set the motor into a RUN_WITHOUT_ENCODER mode
+     */
+    public void csResetEncoders() {
+
+        cSMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+    }
+
+    /**
+     * These methods will get individual encoder position from the drive carousel motor
+     * @return the encoder position
+     */
+    public double getCSMotorDriveEncoderCounts() { return cSMotor.getCurrentPosition(); }
+
+    //**********************************************************************************************
+    //
+    // END CAROUSEL MOTOR METHODS
+    //
+    //**********************************************************************************************
 
     //**********************************************************************************************
     //
     // IMU METHODS
     //
     //**********************************************************************************************
-
-
     /**
      * Gets the current heading from the IMU
      * @return current heading in degrees

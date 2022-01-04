@@ -29,6 +29,9 @@ public class QueenLizzy26Teleop extends OpMode {
     public boolean prevStateRightBumper = false;
     public boolean curStateRightBumper = false;
 
+    double rTrigger = 0.0;
+    double lTrigger = 0.0;
+
     @Override
     public void init() {
 
@@ -54,8 +57,10 @@ public class QueenLizzy26Teleop extends OpMode {
         RightFront = gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x;
 
         curStateRightBumper = gamepad1.right_bumper;
-        //We are normalizing the motor power
+        rTrigger = (double) gamepad1.right_trigger;
+        lTrigger = (double) gamepad1.left_trigger;
 
+        //We are normalizing the motor powers
         maxpwr = findMaxPower(LeftBack, LeftFront, RightBack, RightFront);
 
         LeftBack = LeftBack / maxpwr;
@@ -88,6 +93,10 @@ public class QueenLizzy26Teleop extends OpMode {
                 LeftBack * 0.95 * powermultiplyer,
                 RightBack * 0.95 * powermultiplyer);
 
+        //Set the motor power for the carousel
+        robot.setCarouselMotorPower(rTrigger);
+        robot.setCarouselMotorPower(lTrigger * -1);
+
         telemetry.addLine().addData("Left Front:", LeftFront * 0.95 * powermultiplyer);
         telemetry.addLine().addData("Right Front", RightFront * 0.95 * powermultiplyer);
         telemetry.addLine().addData("Left Rear", LeftBack * 0.95 * powermultiplyer);
@@ -97,8 +106,6 @@ public class QueenLizzy26Teleop extends OpMode {
         telemetry.addLine().addData("left stick X:", gamepad1.left_stick_x);
         telemetry.addLine().addData("left stick Y:", gamepad1.left_stick_y);
         telemetry.update();
-
-
 
         }
 
