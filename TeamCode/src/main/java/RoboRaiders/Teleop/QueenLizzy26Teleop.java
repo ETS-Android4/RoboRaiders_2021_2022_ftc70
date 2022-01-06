@@ -29,6 +29,8 @@ public class QueenLizzy26Teleop extends OpMode {
     public boolean prevStateRightBumper = false;
     public boolean curStateRightBumper = false;
 
+
+
     double rTrigger = 0.0;
     double lTrigger = 0.0;
 
@@ -60,6 +62,7 @@ public class QueenLizzy26Teleop extends OpMode {
         rTrigger = (double) gamepad1.right_trigger;
         lTrigger = (double) gamepad1.left_trigger;
 
+
         //We are normalizing the motor powers
         maxpwr = findMaxPower(LeftBack, LeftFront, RightBack, RightFront);
 
@@ -78,7 +81,7 @@ public class QueenLizzy26Teleop extends OpMode {
             prevStateRightBumper = true;
             powermultiplyer = .5;
 
-            telemetry.addLine().addData("Motors are set to: Half Power", true);
+            telemetry.addLine().addData("Drive Motors are set to: Half Power", true);
 
         }
         //This is to toggles off the halving of the power
@@ -86,16 +89,30 @@ public class QueenLizzy26Teleop extends OpMode {
             prevStateRightBumper = false;
             powermultiplyer = 1.0;
 
-            telemetry.addLine().addData("Motors are set to: Half power", false);
+            telemetry.addLine().addData("Drive Motors are set to: Half power", false);
         }
+
         robot.setDriveMotorPower(LeftFront * 0.95 * powermultiplyer,
                 RightFront * 0.95 * powermultiplyer,
                 LeftBack * 0.95 * powermultiplyer,
                 RightBack * 0.95 * powermultiplyer);
 
-        //Set the motor power for the carousel
-        robot.setCarouselMotorPower(rTrigger);
-        robot.setCarouselMotorPower(lTrigger * -1);
+        //Set the motor power for the carousel based on either the right or left trigger
+        if (rTrigger != 0.0) {
+            robot.setCarouselMotorPower(rTrigger * .75);
+            telemetry.addLine("Carousel Spinning Direction: CounterClockwise");
+            telemetry.addLine("Carousel: Blue Side");
+
+        }
+        else if(lTrigger != 0.0) {
+            robot.setCarouselMotorPower(lTrigger * .75 * -1);
+            telemetry.addLine("Carousel Spinning Direction: Clockwise");
+            telemetry.addLine("Carousel: Red Side");
+
+        }
+        else if(lTrigger == 0.0 && rTrigger == 0.0){
+            robot.setCarouselMotorPower(0.0);
+        }
 
         telemetry.addLine().addData("Left Front:", LeftFront * 0.95 * powermultiplyer);
         telemetry.addLine().addData("Right Front", RightFront * 0.95 * powermultiplyer);
