@@ -131,8 +131,33 @@ public class QueenLizzy26 {
      * Calculates the number of encoder counts to travel a given distance for the drive train motors
      * @param distance
      * @return
+     * Our drive train runs with neverest 20's
      */
     public double driveTrainCalculateCounts(double distance) {
+
+        double COUNTS;
+
+        int DIAMETER = 4; //diameter of wheel
+        double GEAR_RATIO = (1.0 / 1.0); //gear ratio
+
+        double PULSES = 537.6; //encoder counts in one revolution - neverest 20 orbital
+//        double PULSES = 1120.0; //encoder counts in one revolution - neverest 40 orbital
+//        double PULSES = 1680.0; //encoder counts in one revolution - neverest 60 orbital
+
+        double CIRCUMFERENCE = Math.PI * DIAMETER; //gives you circumference
+        double ROTATIONS = (distance / CIRCUMFERENCE) * GEAR_RATIO; //gives the rotations
+        COUNTS = PULSES * ROTATIONS; //gives the counts
+
+        return COUNTS;
+    }
+
+    /**
+     * Calculates the number of encoder counts to travel a given distance for the carousel spinner motor
+     * @param distance
+     * @return
+     * Our drive train runs with neverest 40's
+     */
+    public double spinnerCalculateCounts(double distance) {
 
         double COUNTS;
 
@@ -148,8 +173,8 @@ public class QueenLizzy26 {
         COUNTS = PULSES * ROTATIONS; //gives the counts
 
         return COUNTS;
-    }
 
+    }
     /**
      * Takes the four drive train encoder values and sorts them using a bubble sort algorithm from
      * lowest to highest.  Throws out the lowest and highest values in the sorted list and averages
