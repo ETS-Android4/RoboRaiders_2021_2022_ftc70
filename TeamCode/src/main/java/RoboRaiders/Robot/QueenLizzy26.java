@@ -3,6 +3,7 @@ package RoboRaiders.Robot;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -19,6 +20,13 @@ public class QueenLizzy26 {
     public DcMotor lRMotor = null;
     public DcMotor rRMotor = null;
     public DcMotor cSMotor = null;
+    public Servo scoop = null;
+    public Servo dInTake = null;
+    public Servo mInTake = null;
+    public Servo mDeposit = null;
+    public Servo bDeposit= null;
+    public Servo dDeposit = null;
+
 
 
     public BNO055IMU imu;
@@ -351,6 +359,20 @@ public class QueenLizzy26 {
     //**********************************************************************************************
     //
     // END CAROUSEL MOTOR METHODS
+    //
+    //**********************************************************************************************
+    //**********************************************************************************************
+    //
+    // FREIGHT HANDLING SERVOS METHODS
+    //
+    //**********************************************************************************************
+public void  setScoopDirection() {
+    scoop.setDirection();
+}
+
+    //**********************************************************************************************
+    //
+    // END FREIGHT HANDLING SERVOS METHODS
     //
     //**********************************************************************************************
 
