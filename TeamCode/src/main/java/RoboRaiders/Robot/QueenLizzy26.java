@@ -21,11 +21,11 @@ public class QueenLizzy26 {
     public DcMotor rRMotor = null;
     public DcMotor cSMotor = null;
     public Servo scoop = null;
-    public Servo dInTake = null;
-    public Servo mInTake = null;
-    public Servo mDeposit = null;
-    public Servo bDeposit= null;
-    public Servo dDeposit = null;
+    public Servo scoopMove = null;
+    public Servo scoopDoor = null;
+    public Servo depositMove = null;
+    public Servo depositBrace= null;
+    public Servo depositDoor = null;
 
 
 
