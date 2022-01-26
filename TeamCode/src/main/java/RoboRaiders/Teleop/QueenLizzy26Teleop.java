@@ -3,6 +3,7 @@ package RoboRaiders.Teleop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+
 import RoboRaiders.Robot.QueenLizzy26;
 
 /**
@@ -33,6 +34,17 @@ public class QueenLizzy26Teleop extends OpMode {
 
     double rTrigger = 0.0;
     double lTrigger = 0.0;
+    boolean lDpad = false;
+    boolean uDpad = false;
+    boolean dDpad = false;
+    boolean rDpad = false;
+    boolean xButton = false;
+    boolean yButton = false;
+    boolean bButton = false;
+    boolean aButton = false;
+
+
+
 
     @Override
     public void init() {
@@ -61,6 +73,18 @@ public class QueenLizzy26Teleop extends OpMode {
         curStateRightBumper = gamepad1.right_bumper;
         rTrigger = (double) gamepad1.right_trigger;
         lTrigger = (double) gamepad1.left_trigger;
+
+        lDpad = (boolean) gamepad2.dpad_left;
+        uDpad = (boolean) gamepad2.dpad_left;
+        dDpad = (boolean) gamepad2.dpad_left;
+        rDpad = (boolean) gamepad2.dpad_left;
+        xButton = (boolean) gamepad2.x;
+        yButton = (boolean) gamepad2.x;
+        bButton = (boolean) gamepad2.x;
+        aButton = (boolean) gamepad2.x;
+
+
+
 
 
         //We are normalizing the motor powers
@@ -124,7 +148,13 @@ public class QueenLizzy26Teleop extends OpMode {
         telemetry.addLine().addData("left stick Y:", gamepad1.left_stick_y);
         telemetry.update();
 
+        if(lDpad == true){
+            scoop.setPosition(0.0);
         }
+
+        }
+
+
 
 
 

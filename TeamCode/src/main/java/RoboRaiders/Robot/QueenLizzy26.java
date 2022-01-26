@@ -90,6 +90,14 @@ public class QueenLizzy26 {
         lRMotor.setPower(0.0);
         cSMotor.setPower(0.0);
 
+        // Set all servos to zero
+        scoop.setPosition(0.0);
+        scoopDoor.setPosition(0.0);
+        scoopMove.setPosition(0.0);
+        depositMove.setPosition(0.0);
+        depositDoor.setPosition(0.0);
+        depositBrace.setPosition(0.0);
+
         // Stop and reset encoders
         resetEncoders();
 
@@ -106,6 +114,14 @@ public class QueenLizzy26 {
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         parameters.mode = BNO055IMU.SensorMode.IMU;
         imu.initialize(parameters);
+
+        // Define and initialize sensors
+        scoop = hwMap.get(Servo.class, "scoop");
+        scoopMove = hwMap.get(Servo.class, "scoopMove");
+        scoopDoor = hwMap.get(Servo.class,"scoopDoor");
+        depositBrace = hwMap.get(Servo.class, "depositBrace");
+        depositDoor = hwMap.get(Servo.class, "depositDoor");
+        depositMove = hwMap.get(Servo.class, "depositMove");
 
     }
 
@@ -366,9 +382,25 @@ public class QueenLizzy26 {
     // FREIGHT HANDLING SERVOS METHODS
     //
     //**********************************************************************************************
-public void  setScoopDirection() {
-    scoop.setDirection();
+    public void  setScoopDirection() {
+        scoop.setDirection(Servo.Direction.FORWARD);
 }
+    public void  setScoopMoveDirection() {
+        scoopMove.setDirection(Servo.Direction.FORWARD);
+}
+    public void  setScoopDoorDirection() {
+        scoopDoor.setDirection(Servo.Direction.FORWARD);
+}
+    public void  setDepositMoveDirection() {
+        depositMove.setDirection(Servo.Direction.FORWARD);
+}
+    public void  setDepositBraceDirection() {
+        depositBrace.setDirection(Servo.Direction.FORWARD);
+}
+    public void  setDepositDoorDirection() {
+        depositDoor.setDirection(Servo.Direction.FORWARD);
+}
+
 
     //**********************************************************************************************
     //
