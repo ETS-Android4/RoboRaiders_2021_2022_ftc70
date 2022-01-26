@@ -30,23 +30,31 @@ public class QueenLizzy26Teleop extends OpMode {
     public boolean prevStateRightBumper = false;
     public boolean curStateRightBumper = false;
 
-    public boolean prevStateLDpad = false
+    public boolean prevStateUDpad = false;
+    public boolean curStateUDpad = false;
+
+    public boolean prevStateXbutton= false;
+    public boolean curStateXbutton = false;
+
+    public boolean prevStateDDpad = false;
+    public boolean curStateDDpad = false;
+
+    public boolean prevStateLDpad = false;
+    public boolean curStateLDpad = false;
+
+
+
 
 
 
     double rTrigger = 0.0;
     double lTrigger = 0.0;
-    boolean lDpad = false;
-    boolean uDpad = false;
-    boolean dDpad = false;
 
     boolean xButton = false;
     boolean yButton = false;
     boolean bButton = false;
     boolean aButton = false;
-
-
-
+    boolean rBumper2 = false;
 
     @Override
     public void init() {
@@ -76,18 +84,16 @@ public class QueenLizzy26Teleop extends OpMode {
         rTrigger = (double) gamepad1.right_trigger;
         lTrigger = (double) gamepad1.left_trigger;
 
-        lDpad = (boolean) gamepad2.dpad_left;
-        uDpad = (boolean) gamepad2.dpad_left;
-        dDpad = (boolean) gamepad2.dpad_left;
+        curStateDDpad = gamepad2.dpad_up;
+        curStateUDpad = gamepad2.dpad_down;
+        curStateLDpad = gamepad2.dpad_left;
+        curStateXbutton = gamepad2.x;
 
         xButton = (boolean) gamepad2.x;
-        yButton = (boolean) gamepad2.x;
-        bButton = (boolean) gamepad2.x;
-        aButton = (boolean) gamepad2.x;
-
-
-
-
+        yButton = (boolean) gamepad2.y;
+        bButton = (boolean) gamepad2.b;
+        aButton = (boolean) gamepad2.a;
+        rBumper2 = (boolean) gamepad2.right_bumper;
 
         //We are normalizing the motor powers
         maxpwr = findMaxPower(LeftBack, LeftFront, RightBack, RightFront);
@@ -140,6 +146,51 @@ public class QueenLizzy26Teleop extends OpMode {
             robot.setCarouselMotorPower(0.0);
         }
 
+        if((curStateDDpad == true && prevStateDDpad == false) || (curStateDDpad == false && prevStateDDpad == true)){
+            prevStateDDpad = true;
+            robot.scoopMove.setPosition(1.0);
+
+        }
+
+        else if(curStateDDpad == true && prevStateDDpad == true){
+            prevStateDDpad = false;
+            robot.scoopMove.setPosition(0.0);
+        }
+
+        if((curStateUDpad == true && prevStateUDpad == false) || (curStateUDpad == false && prevStateUDpad == true)){
+            prevStateUDpad = true;
+            robot.scoop.setPosition(1.0);
+
+        }
+
+        else if(curStateUDpad == true && prevStateUDpad == true){
+            prevStateDDpad = false;
+            robot.scoop.setPosition(0.0);
+        }
+
+        if((curStateLDpad == true && prevStateLDpad == false) || (curStateLDpad == false && prevStateLDpad == true)){
+            prevStateLDpad = true;
+            robot.scoopDoor.setPosition(1.0);
+
+        }
+
+        else if(curStateLDpad == true && prevStateLDpad == true){
+            prevStateLDpad = false;
+            robot.scoopDoor.setPosition(0.0);
+        }
+
+        if((curStateXbutton == true && prevStateXbutton == false) || (curStateXbutton == false && prevStateXbutton == true)){
+            prevStateXbutton = true;
+            robot.depositDoor.setPosition(1.0);
+
+        }
+
+        else if(curStateXbutton == true && prevStateXbutton == true){
+            prevStateXbutton = false;
+            robot.depositDoor.setPosition(0.0);
+
+
+
         telemetry.addLine().addData("Left Front:", LeftFront * 0.95 * powermultiplyer);
         telemetry.addLine().addData("Right Front", RightFront * 0.95 * powermultiplyer);
         telemetry.addLine().addData("Left Rear", LeftBack * 0.95 * powermultiplyer);
@@ -150,33 +201,25 @@ public class QueenLizzy26Teleop extends OpMode {
         telemetry.addLine().addData("left stick Y:", gamepad1.left_stick_y);
         telemetry.update();
 
-        if(lDpad == true){
-            robot.scoopDoor.setPosition(0.0);
-        }
 
-        else if(uDpad == true){
-            robot.scoop.setPosition(0.0);
-        }
-        else if(dDpad == true){
-            robot.scoopMove.setPosition(0.0);
-        }
-        else if(xButton == true){
-            robot.depositDoor.setPosition(0.0);
-        }
-        else if(yButton == true){
-            robot.depositDoor.setPosition(0.0);
+
+        if(yButton == true){
+            robot.depositDoor.setPosition(0.5);
         }
         else if(aButton == true){
-            robot.depositDoor.setPosition(0.0);
+            robot.depositDoor.setPosition(0.5);
         }
         else if(bButton == true){
-            robot.depositDoor.setPosition(0.0);
+            robot.depositDoor.setPosition(0.5);
+        }
+        else if(rBumper2 == true){
+            robot.depositMove.setPosition(0.0);
         }
 
         }
 
 
-
+    telemetry.addLine().addData("the servo is", robot.depositMove);
 
 
     @Override
