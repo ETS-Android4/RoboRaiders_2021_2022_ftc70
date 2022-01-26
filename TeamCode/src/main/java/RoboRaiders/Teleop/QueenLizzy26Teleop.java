@@ -144,41 +144,37 @@ public class QueenLizzy26Teleop extends OpMode {
             robot.setCarouselMotorPower(0.0);
         }
 
-        if ((curStateDDpad == true && prevStateDDpad == false) || (curStateDDpad == false && prevStateDDpad == true)) {
-            prevStateDDpad = true;
+        //Set the position for the servos based on D-Pad buttons
+        if (curStateDDpad == true) {
+
             robot.scoopMove.setPosition(1.0);
 
-        } else if (curStateDDpad == true && prevStateDDpad == true) {
-            prevStateDDpad = false;
+        } else{
             robot.scoopMove.setPosition(0.0);
         }
 
-        if ((curStateUDpad == true && prevStateUDpad == false) || (curStateUDpad == false && prevStateUDpad == true)) {
-            prevStateUDpad = true;
+        if (curStateUDpad == true){
+
             robot.scoop.setPosition(1.0);
 
-        } else if (curStateUDpad == true && prevStateUDpad == true) {
-            prevStateDDpad = false;
+        } else{
             robot.scoop.setPosition(0.0);
         }
 
         if ((curStateLDpad == true && prevStateLDpad == false) || (curStateLDpad == false && prevStateLDpad == true)) {
-            prevStateLDpad = true;
             robot.scoopDoor.setPosition(1.0);
 
-        } else if (curStateLDpad == true && prevStateLDpad == true) {
-            prevStateLDpad = false;
+        } else{
             robot.scoopDoor.setPosition(0.0);
         }
 
-        if ((curStateXbutton == true && prevStateXbutton == false) || (curStateXbutton == false && prevStateXbutton == true)) {
+        if (curStateXbutton == true) {
             prevStateXbutton = true;
             robot.depositDoor.setPosition(1.0);
 
-        } else if (curStateXbutton == true && prevStateXbutton == true) {
-            prevStateXbutton = false;
+        } else{
             robot.depositDoor.setPosition(0.0);
-
+        }
 
             telemetry.addLine().addData("Left Front:", LeftFront * 0.95 * powermultiplyer);
             telemetry.addLine().addData("Right Front", RightFront * 0.95 * powermultiplyer);
@@ -202,7 +198,7 @@ public class QueenLizzy26Teleop extends OpMode {
             }
             telemetry.addLine().addData("the DEPOSIT servo is ", robot.depositMove);
             telemetry.addLine().addData("the BRACE servo is ", robot.depositBrace);
-        }
+
         }
 
 

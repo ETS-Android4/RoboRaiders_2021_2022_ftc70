@@ -90,14 +90,6 @@ public class QueenLizzy26 {
         lRMotor.setPower(0.0);
         cSMotor.setPower(0.0);
 
-        // Set all servos to zero
-        scoop.setPosition(0.0);
-        scoopDoor.setPosition(0.0);
-        scoopMove.setPosition(0.0);
-        depositMove.setPosition(0.0);
-        depositDoor.setPosition(0.0);
-        depositBrace.setPosition(0.0);
-
         // Stop and reset encoders
         resetEncoders();
 
