@@ -123,6 +123,14 @@ public class QueenLizzy26 {
         depositDoor = hwMap.get(Servo.class, "depositDoor");
         depositMove = hwMap.get(Servo.class, "depositMove");
 
+
+        // Set all servos to zero
+        scoop.setPosition(0.0);
+        scoopDoor.setPosition(0.0);
+        scoopMove.setPosition(0.0);
+        depositMove.setPosition(0.0);
+        depositDoor.setPosition(0.0);
+        depositBrace.setPosition(0.0);
     }
 
 

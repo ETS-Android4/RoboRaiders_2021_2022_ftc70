@@ -30,6 +30,8 @@ public class QueenLizzy26Teleop extends OpMode {
     public boolean prevStateRightBumper = false;
     public boolean curStateRightBumper = false;
 
+    public boolean prevStateLDpad = false
+
 
 
     double rTrigger = 0.0;
@@ -37,7 +39,7 @@ public class QueenLizzy26Teleop extends OpMode {
     boolean lDpad = false;
     boolean uDpad = false;
     boolean dDpad = false;
-    boolean rDpad = false;
+
     boolean xButton = false;
     boolean yButton = false;
     boolean bButton = false;
@@ -77,7 +79,7 @@ public class QueenLizzy26Teleop extends OpMode {
         lDpad = (boolean) gamepad2.dpad_left;
         uDpad = (boolean) gamepad2.dpad_left;
         dDpad = (boolean) gamepad2.dpad_left;
-        rDpad = (boolean) gamepad2.dpad_left;
+
         xButton = (boolean) gamepad2.x;
         yButton = (boolean) gamepad2.x;
         bButton = (boolean) gamepad2.x;
@@ -149,7 +151,26 @@ public class QueenLizzy26Teleop extends OpMode {
         telemetry.update();
 
         if(lDpad == true){
-            scoop.setPosition(0.0);
+            robot.scoopDoor.setPosition(0.0);
+        }
+
+        else if(uDpad == true){
+            robot.scoop.setPosition(0.0);
+        }
+        else if(dDpad == true){
+            robot.scoopMove.setPosition(0.0);
+        }
+        else if(xButton == true){
+            robot.depositDoor.setPosition(0.0);
+        }
+        else if(yButton == true){
+            robot.depositDoor.setPosition(0.0);
+        }
+        else if(aButton == true){
+            robot.depositDoor.setPosition(0.0);
+        }
+        else if(bButton == true){
+            robot.depositDoor.setPosition(0.0);
         }
 
         }
