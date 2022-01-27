@@ -55,6 +55,7 @@ public class QueenLizzy26Teleop extends OpMode {
     boolean bButton = false;
     boolean aButton = false;
     boolean rBumper2 = false;
+    boolean rDpad = false;
 
     @Override
     public void init() {
@@ -84,8 +85,8 @@ public class QueenLizzy26Teleop extends OpMode {
         rTrigger = (double) gamepad1.right_trigger;
         lTrigger = (double) gamepad1.left_trigger;
 
-        curStateDDpad = gamepad2.dpad_up;
-        curStateUDpad = gamepad2.dpad_down;
+        curStateDDpad = gamepad2.dpad_down;
+        curStateUDpad = gamepad2.dpad_up;
         curStateLDpad = gamepad2.dpad_left;
         curStateXbutton = gamepad2.x;
 
@@ -94,6 +95,7 @@ public class QueenLizzy26Teleop extends OpMode {
         bButton = (boolean) gamepad2.b;
         aButton = (boolean) gamepad2.a;
         rBumper2 = (boolean) gamepad2.right_bumper;
+        rDpad = (boolean) gamepad2.dpad_right;
 
         //We are normalizing the motor powers
         maxpwr = findMaxPower((double)LeftBack, (double)LeftFront, (double)RightBack, (double)RightFront);
@@ -146,34 +148,34 @@ public class QueenLizzy26Teleop extends OpMode {
 
         //Set the position for the servos based on D-Pad buttons
 
-        else if (curStateDDpad == true && prevStateDDpad == false) {
-            prevStateDDpad = true;
-
-            robot.scoopMove.setPosition(1.0);
-        }
-        else if(curStateDDpad == true && prevStateDDpad == true){
-            prevStateDDpad = false;
+        if (curStateDDpad == true){
             robot.scoopMove.setPosition(0.0);
         }
 
 
-        else if (curStateUDpad == true){
+        if (curStateUDpad == true){
+
+            robot.scoopMove.setPosition(1.0);
+
+        }
+        if (rDpad == true){
 
             robot.scoop.setPosition(1.0);
 
-        } else{
-            robot.scoop.setPosition(0.0);
+        }
+        else{
+            robot.scoop.setPosition(0.5);
         }
 
         if ((curStateLDpad == true && prevStateLDpad == false) || (curStateLDpad == false && prevStateLDpad == true)) {
             robot.scoopDoor.setPosition(1.0);
 
         } else{
-            robot.scoopDoor.setPosition(0.5);
+            robot.scoopDoor.setPosition(0.0);
         }
 
         if (curStateXbutton == true) {
-            prevStateXbutton = true;
+
             robot.depositDoor.setPosition(1.0);
 
         } else{
@@ -192,16 +194,16 @@ public class QueenLizzy26Teleop extends OpMode {
 
 
             if (yButton == true) {
-                robot.depositBrace.setPosition(0.75);
-                robot.depositMove.setPosition(0.65);
+                robot.depositBrace.setPosition(0.71);
+                robot.depositMove.setPosition(0.73);
 
             } else if (aButton == true) {
-                robot.depositBrace.setPosition(0.55);
-                robot.depositMove.setPosition(0.85);
+                robot.depositBrace.setPosition(0.50);
+                robot.depositMove.setPosition(1.0);
 
             } else if (bButton == true) {
-                robot.depositBrace.setPosition(0.65);
-                robot.depositMove.setPosition(0.75);
+                robot.depositBrace.setPosition(0.62);
+                robot.depositMove.setPosition(0.90);
 
             } else if (rBumper2 == true) {
                 robot.depositBrace.setPosition(1.0);
