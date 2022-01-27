@@ -122,7 +122,7 @@ public class QueenLizzy26 {
         scoopMove.setPosition(0.0);
         depositMove.setPosition(0.0);
         depositDoor.setPosition(0.0);
-        depositBrace.setPosition(0.0);
+        depositBrace.setPosition(1.0);
     }
 
 

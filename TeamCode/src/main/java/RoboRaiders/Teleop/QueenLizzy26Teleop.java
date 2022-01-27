@@ -145,15 +145,19 @@ public class QueenLizzy26Teleop extends OpMode {
         }
 
         //Set the position for the servos based on D-Pad buttons
-        if (curStateDDpad == true) {
+
+        else if (curStateDDpad == true && prevStateDDpad == false) {
+            prevStateDDpad = true;
 
             robot.scoopMove.setPosition(1.0);
-
-        } else{
+        }
+        else if(curStateDDpad == true && prevStateDDpad == true){
+            prevStateDDpad = false;
             robot.scoopMove.setPosition(0.0);
         }
 
-        if (curStateUDpad == true){
+
+        else if (curStateUDpad == true){
 
             robot.scoop.setPosition(1.0);
 
@@ -165,7 +169,7 @@ public class QueenLizzy26Teleop extends OpMode {
             robot.scoopDoor.setPosition(1.0);
 
         } else{
-            robot.scoopDoor.setPosition(0.0);
+            robot.scoopDoor.setPosition(0.5);
         }
 
         if (curStateXbutton == true) {
@@ -188,14 +192,23 @@ public class QueenLizzy26Teleop extends OpMode {
 
 
             if (yButton == true) {
-                robot.depositDoor.setPosition(0.5);
+                robot.depositBrace.setPosition(0.75);
+                robot.depositMove.setPosition(0.65);
+
             } else if (aButton == true) {
-                robot.depositDoor.setPosition(0.5);
+                robot.depositBrace.setPosition(0.55);
+                robot.depositMove.setPosition(0.85);
+
             } else if (bButton == true) {
-                robot.depositDoor.setPosition(0.5);
+                robot.depositBrace.setPosition(0.65);
+                robot.depositMove.setPosition(0.75);
+
             } else if (rBumper2 == true) {
+                robot.depositBrace.setPosition(1.0);
                 robot.depositMove.setPosition(0.0);
+
             }
+
             telemetry.addLine().addData("the DEPOSIT servo is ", robot.depositMove);
             telemetry.addLine().addData("the BRACE servo is ", robot.depositBrace);
 
