@@ -76,10 +76,10 @@ public class QueenLizzy26Teleop extends OpMode {
     public void loop() {
 
         // "Mecanum Drive" functionality
-        LeftBack = -gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x;
-        RightBack = gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x;
-        LeftFront = -gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x;
-        RightFront = gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x;
+        LeftBack = -gamepad1.left_stick_x - gamepad1.left_stick_y + gamepad1.right_stick_y;
+        RightBack = gamepad1.left_stick_x + gamepad1.left_stick_y + gamepad1.right_stick_y;
+        LeftFront = -gamepad1.left_stick_x + gamepad1.left_stick_y + gamepad1.right_stick_y;
+        RightFront = gamepad1.left_stick_x - gamepad1.left_stick_y + gamepad1.right_stick_y;
 
         curStateRightBumper = gamepad1.right_bumper;
         rTrigger = (double) gamepad1.right_trigger;
@@ -168,7 +168,9 @@ public class QueenLizzy26Teleop extends OpMode {
         }
 
         if ((curStateLDpad == true && prevStateLDpad == false) || (curStateLDpad == false && prevStateLDpad == true)) {
+            robot.depositDoor.setPosition(1.0);
             robot.scoopDoor.setPosition(1.0);
+
 
         } else{
             robot.scoopDoor.setPosition(0.0);
