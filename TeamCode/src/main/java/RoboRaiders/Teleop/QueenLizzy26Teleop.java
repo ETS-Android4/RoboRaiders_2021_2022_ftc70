@@ -30,13 +30,9 @@ public class QueenLizzy26Teleop extends OpMode {
     public boolean prevStateRightBumper = false;
     public boolean curStateRightBumper = false;
 
-    public boolean prevStateUDpad = false;
     public boolean curStateUDpad = false;
-
-    public boolean prevStateXbutton= false;
     public boolean curStateXbutton = false;
 
-    public boolean prevStateDDpad = false;
     public boolean curStateDDpad = false;
 
     public boolean prevStateLDpad = false;
@@ -149,13 +145,13 @@ public class QueenLizzy26Teleop extends OpMode {
         //Set the position for the servos based on D-Pad buttons
 
         if (curStateDDpad == true){
-            robot.scoopMove.setPosition(0.0);
+            robot.setContingencyMotorPower(1.0);
+
         }
 
 
         if (curStateUDpad == true){
-
-            robot.scoopMove.setPosition(1.0);
+            robot.setContingencyMotorPower(-1.0);
 
         }
         if (rDpad == true){

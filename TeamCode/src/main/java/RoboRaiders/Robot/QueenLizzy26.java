@@ -22,7 +22,6 @@ public class QueenLizzy26 {
     public DcMotor cSMotor = null;
     public DcMotor contMotor = null;
     public Servo scoop = null;
-    public Servo scoopMove = null;
     public Servo scoopDoor = null;
     public Servo depositMove = null;
     public Servo depositBrace= null;
@@ -113,7 +112,7 @@ public class QueenLizzy26 {
 
         // Define and initialize sensors
         scoop = hwMap.get(Servo.class, "scoop");
-        scoopMove = hwMap.get(Servo.class, "scoopMove");
+
         scoopDoor = hwMap.get(Servo.class,"scoopDoor");
         depositBrace = hwMap.get(Servo.class, "depositBrace");
         depositDoor = hwMap.get(Servo.class, "depositDoor");
@@ -123,7 +122,6 @@ public class QueenLizzy26 {
         // Set all servos to zero
         scoop.setPosition(0.0);
         scoopDoor.setPosition(0.0);
-        scoopMove.setPosition(0.0);
         depositMove.setPosition(0.0);
         depositDoor.setPosition(0.0);
         depositBrace.setPosition(1.0);
@@ -460,9 +458,6 @@ public class QueenLizzy26 {
     //**********************************************************************************************
     public void  setScoopDirection() {
         scoop.setDirection(Servo.Direction.FORWARD);
-}
-    public void  setScoopMoveDirection() {
-        scoopMove.setDirection(Servo.Direction.FORWARD);
 }
     public void  setScoopDoorDirection() {
         scoopDoor.setDirection(Servo.Direction.FORWARD);
