@@ -74,11 +74,10 @@ public class QueenLizzy26AutoW extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
        // while (opModeIsActive()) {
-
             //Strafe over to carousel
             stevesRobot.resetEncoders();
             stevesRobot.runWithEncoders();
-            numofticks = stevesRobot.driveTrainCalculateCounts(7.4);
+            numofticks = stevesRobot.driveTrainCalculateCounts(20.0);
             stevesRobot.runWithEncoders();
             stevesRobot.setDriveMotorPower(.30, -.30, -.30, .30);
 

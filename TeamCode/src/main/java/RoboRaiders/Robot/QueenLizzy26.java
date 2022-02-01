@@ -20,6 +20,7 @@ public class QueenLizzy26 {
     public DcMotor lRMotor = null;
     public DcMotor rRMotor = null;
     public DcMotor cSMotor = null;
+    public DcMotor contMotor = null;
     public Servo scoop = null;
     public Servo scoopMove = null;
     public Servo scoopDoor = null;
@@ -71,6 +72,7 @@ public class QueenLizzy26 {
         lRMotor = hwMap.get(DcMotor.class, "lRMotor");
         rRMotor = hwMap.get(DcMotor.class, "rRMotor");
         cSMotor = hwMap.get(DcMotor.class, "cSMotor");
+        contMotor = hwMap.get(DcMotor.class, "contMotor");
 
         // Defines the directions the motors will spin
         lFMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -89,6 +91,7 @@ public class QueenLizzy26 {
         rRMotor.setPower(0.0);
         lRMotor.setPower(0.0);
         cSMotor.setPower(0.0);
+        contMotor.setPower(0.0);
 
         // Stop and reset encoders
         resetEncoders();
@@ -100,6 +103,7 @@ public class QueenLizzy26 {
         lRMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rRMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         cSMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        contMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize sensors
         imu = hwMap.get(BNO055IMU.class, "imu");
@@ -375,6 +379,78 @@ public class QueenLizzy26 {
     //**********************************************************************************************
     //
     // END CAROUSEL MOTOR METHODS
+    //
+    //**********************************************************************************************
+
+    //**********************************************************************************************
+    //
+    // CONTINGENCY MOTOR METHODS
+    //
+    //**********************************************************************************************
+    /**
+     * This method will set the power for the contingency motor
+     *
+     * @param contingency power setting for the contingency motor
+     */
+    public void setContingencyMotorPower(double contingency) {
+
+        contMotor.setPower(contingency);
+
+
+    }
+    /**
+     * Sets the target encoder value for the contingency motor
+     ** @param encoderPosition
+     */
+    public void setContMotorTargetPosition(int encoderPosition){
+        contMotor.setTargetPosition(encoderPosition);
+
+    }
+
+    /**
+     * This method will set the mode of the contingency motor to run using encoder
+     */
+    public void contRunWithEncoders() {
+
+        contMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    /**
+     * This method will set the mode of the contingency motor to RUN_TO_POSITION
+     */
+    public void contRunWithEncodersSTP() {
+        contMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+    }
+
+    /**
+     * This method will set the mode of the contingency motor to run without encoder
+     */
+    public void contRunWithoutEncoders() {
+
+        contMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+    }
+
+    /**
+     * This will set the mode of the contingency train motor to STOP_AND_RESET_ENCODER, which will zero
+     * the encoder count but also set the motor into a RUN_WITHOUT_ENCODER mode
+     */
+    public void contResetEncoders() {
+
+        contMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+    }
+
+    /**
+     * These methods will get individual encoder position from the contingency motor
+     * @return the encoder position
+     */
+    public double getContSMotorDriveEncoderCounts() { return contMotor.getCurrentPosition(); }
+
+    //**********************************************************************************************
+    //
+    // END Contingency MOTOR METHODS
     //
     //**********************************************************************************************
     //**********************************************************************************************

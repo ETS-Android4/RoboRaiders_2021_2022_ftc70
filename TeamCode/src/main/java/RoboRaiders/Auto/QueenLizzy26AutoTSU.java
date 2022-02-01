@@ -77,7 +77,7 @@ public class QueenLizzy26AutoTSU extends LinearOpMode {
         //Strafe over to carousel
         stevesRobot.resetEncoders();
         stevesRobot.runWithEncoders();
-        numofticks = stevesRobot.driveTrainCalculateCounts(7.2);
+        numofticks = stevesRobot.driveTrainCalculateCounts(15.0);
         stevesRobot.runWithEncoders();
         stevesRobot.setDriveMotorPower(.30, -.30, -.30, .30);
 
