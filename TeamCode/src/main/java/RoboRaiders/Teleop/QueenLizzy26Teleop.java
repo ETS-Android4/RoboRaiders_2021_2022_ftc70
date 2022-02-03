@@ -2,6 +2,8 @@ package RoboRaiders.Teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 import RoboRaiders.Robot.QueenLizzy26;
@@ -51,7 +53,9 @@ public class QueenLizzy26Teleop extends OpMode {
     boolean bButton = false;
     boolean aButton = false;
     boolean rBumper2 = false;
-    boolean rDpad = false;
+
+    double rTrigger2 = 0.0;
+    double lTrigger2 = 0.0;
 
     @Override
     public void init() {
@@ -91,7 +95,8 @@ public class QueenLizzy26Teleop extends OpMode {
         bButton = (boolean) gamepad2.b;
         aButton = (boolean) gamepad2.a;
         rBumper2 = (boolean) gamepad2.right_bumper;
-        rDpad = (boolean) gamepad2.dpad_right;
+        rTrigger2 = (double) gamepad2.right_trigger;
+        lTrigger2 = (double) gamepad2.left_trigger;
 
         //We are normalizing the motor powers
         maxpwr = findMaxPower((double)LeftBack, (double)LeftFront, (double)RightBack, (double)RightFront);
@@ -154,14 +159,15 @@ public class QueenLizzy26Teleop extends OpMode {
             robot.setContingencyMotorPower(-1.0);
 
         }
-        if (rDpad == true){
-
-            robot.scoop.setPosition(1.0);
-
+        while (rTrigger2 > 0.05) {
+            robot.scoop.setPower(0.75);
+            robot.scoop.setDirection(CRServo.Direction.FORWARD);
         }
-        else{
-            robot.scoop.setPosition(0.5);
+        while (lTrigger2 > 0.05){
+            robot.scoop.setPower(0.75);
+            robot.scoop.setDirection(CRServo.Direction.REVERSE);
         }
+
 
         if ((curStateLDpad == true && prevStateLDpad == false) || (curStateLDpad == false && prevStateLDpad == true)) {
             robot.scoopDoor.setPosition(1.0);

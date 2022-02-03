@@ -1,6 +1,7 @@
 package RoboRaiders.Robot;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -21,7 +22,7 @@ public class QueenLizzy26 {
     public DcMotor rRMotor = null;
     public DcMotor cSMotor = null;
     public DcMotor contMotor = null;
-    public Servo scoop = null;
+    public CRServo scoop = null;
     public Servo scoopDoor = null;
     public Servo depositMove = null;
     public Servo depositBrace= null;
@@ -111,7 +112,7 @@ public class QueenLizzy26 {
         imu.initialize(parameters);
 
         // Define and initialize sensors
-        scoop = hwMap.get(Servo.class, "scoop");
+        scoop = hwMap.get(CRServo.class, "scoop");
 
         scoopDoor = hwMap.get(Servo.class,"scoopDoor");
         depositBrace = hwMap.get(Servo.class, "depositBrace");
@@ -120,7 +121,6 @@ public class QueenLizzy26 {
 
 
         // Set all servos to zero
-        scoop.setPosition(0.0);
         scoopDoor.setPosition(0.0);
         depositMove.setPosition(0.0);
         depositDoor.setPosition(0.0);
@@ -457,10 +457,9 @@ public class QueenLizzy26 {
     //
     //**********************************************************************************************
     public void  setScoopDirection() {
-        scoop.setDirection(Servo.Direction.FORWARD);
+        scoop.setDirection(CRServo.Direction.FORWARD);
 }
-    public void  setScoopDoorDirection() {
-        scoopDoor.setDirection(Servo.Direction.FORWARD);
+    public void  setScoopDoorDirection() {scoopDoor.setDirection(Servo.Direction.FORWARD);
 }
     public void  setDepositMoveDirection() {
         depositMove.setDirection(Servo.Direction.FORWARD);
