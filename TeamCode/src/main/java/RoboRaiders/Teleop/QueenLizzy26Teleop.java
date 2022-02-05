@@ -3,6 +3,7 @@ package RoboRaiders.Teleop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
@@ -29,8 +30,8 @@ public class QueenLizzy26Teleop extends OpMode {
     double maxpwr;     // Maximum power of the four motors
     double powermultiplyer = 1.0;
 
-    public boolean prevStateRightBumper = false;
-    public boolean curStateRightBumper = false;
+    public boolean prevStateRightB = false;
+    public boolean curStateRightB = false;
 
     public boolean curStateUDpad = false;
     public boolean curStateXbutton = false;
@@ -81,22 +82,22 @@ public class QueenLizzy26Teleop extends OpMode {
         LeftFront = gamepad1.right_stick_y - gamepad1.right_stick_x + gamepad1.left_stick_x;
         RightFront = -gamepad1.right_stick_y + gamepad1.right_stick_x + gamepad1.left_stick_x;
 
-        curStateRightBumper = gamepad1.right_bumper;
-        rTrigger = (double) gamepad1.right_trigger;
-        lTrigger = (double) gamepad1.left_trigger;
+        curStateRightB = gamepad1.b;
+        rTrigger = gamepad1.right_trigger;
+        lTrigger = gamepad1.left_trigger;
 
         curStateDDpad = gamepad2.dpad_down;
         curStateUDpad = gamepad2.dpad_up;
         curStateLDpad = gamepad2.dpad_left;
         curStateXbutton = gamepad2.x;
 
-        xButton = (boolean) gamepad2.x;
-        yButton = (boolean) gamepad2.y;
-        bButton = (boolean) gamepad2.b;
-        aButton = (boolean) gamepad2.a;
-        rBumper2 = (boolean) gamepad2.right_bumper;
-        rTrigger2 = (double) gamepad2.right_trigger;
-        lTrigger2 = (double) gamepad2.left_trigger;
+        xButton = gamepad2.x;
+        yButton = gamepad2.y;
+        bButton = gamepad2.b;
+        aButton = gamepad2.a;
+        rBumper2 = gamepad2.right_bumper;
+        rTrigger2 = gamepad2.right_trigger;
+        lTrigger2 = gamepad2.left_trigger;
 
         //We are normalizing the motor powers
         maxpwr = findMaxPower((double)LeftBack, (double)LeftFront, (double)RightBack, (double)RightFront);
@@ -112,16 +113,16 @@ public class QueenLizzy26Teleop extends OpMode {
         RightFront = (float) scaleInput(RightFront);
 
         //This toggles on the halving of the power either when its pressed down and it wasn't previously pressed, or when it wasn't pressed but was previously pressed
-        if ((curStateRightBumper == true && prevStateRightBumper == false) || (curStateRightBumper == false && prevStateRightBumper == true)) {
-            prevStateRightBumper = true;
+        if ((curStateRightB && !prevStateRightB) || (!curStateRightB && prevStateRightB)) {
+            prevStateRightB = true;
             powermultiplyer = .5;
 
             telemetry.addLine().addData("Drive Motors are set to: Half Power", true);
 
         }
         //This is to toggles off the halving of the power
-        else if (curStateRightBumper == true && prevStateRightBumper == true) {
-            prevStateRightBumper = false;
+        else if (curStateRightB && prevStateRightB) {
+            prevStateRightB = false;
             powermultiplyer = 1.0;
 
             telemetry.addLine().addData("Drive Motors are set to: Half power", false);
@@ -149,27 +150,34 @@ public class QueenLizzy26Teleop extends OpMode {
 
         //Set the position for the servos based on D-Pad buttons
 
-        if (curStateDDpad == true){
-            robot.setContingencyMotorPower(1.0);
+        if (curStateDDpad){
+            robot.scoopMove.setPosition(1.0);
 
         }
 
 
-        if (curStateUDpad == true){
-            robot.setContingencyMotorPower(-1.0);
+        if (curStateUDpad){
+            robot.scoopMove.setPosition(0.0);
 
-        }
-        while (rTrigger2 > 0.05) {
-            robot.scoop.setPower(0.75);
-            robot.scoop.setDirection(CRServo.Direction.FORWARD);
-        }
-        while (lTrigger2 > 0.05){
-            robot.scoop.setPower(0.75);
-            robot.scoop.setDirection(CRServo.Direction.REVERSE);
+
+
         }
 
 
-        if ((curStateLDpad == true && prevStateLDpad == false) || (curStateLDpad == false && prevStateLDpad == true)) {
+        if (rTrigger2 != 0.0){
+            robot.scoop.setPosition(1.0);
+        }
+        else if (lTrigger2 != 0.0){
+            robot.scoop.setPosition(-1.0);
+        }
+        else if (lTrigger2 == 0.0 && rTrigger2 == 0.0){
+            robot.scoop.setPosition(0.5);
+            telemetry.addLine().addData("Neither direction is in use", lTrigger2);
+
+        }
+
+
+        if ((curStateLDpad && !prevStateLDpad) || (!curStateLDpad && prevStateLDpad)) {
             robot.scoopDoor.setPosition(1.0);
 
 
@@ -177,7 +185,7 @@ public class QueenLizzy26Teleop extends OpMode {
             robot.scoopDoor.setPosition(0.0);
         }
 
-        if (curStateXbutton == true) {
+        if (curStateXbutton) {
 
             robot.depositDoor.setPosition(1.0);
 
@@ -196,19 +204,19 @@ public class QueenLizzy26Teleop extends OpMode {
             telemetry.update();
 
 
-            if (yButton == true) {
+            if (yButton) {
                 robot.depositBrace.setPosition(0.71);
                 robot.depositMove.setPosition(0.73);
 
-            } else if (aButton == true) {
+            } else if (aButton) {
                 robot.depositBrace.setPosition(0.50);
                 robot.depositMove.setPosition(1.0);
 
-            } else if (bButton == true) {
+            } else if (bButton) {
                 robot.depositBrace.setPosition(0.62);
                 robot.depositMove.setPosition(0.90);
 
-            } else if (rBumper2 == true) {
+            } else if (rBumper2) {
                 robot.depositBrace.setPosition(1.0);
                 robot.depositMove.setPosition(0.0);
 

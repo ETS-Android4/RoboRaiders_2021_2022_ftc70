@@ -1,7 +1,6 @@
 package RoboRaiders.Robot;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -21,8 +20,8 @@ public class QueenLizzy26 {
     public DcMotor lRMotor = null;
     public DcMotor rRMotor = null;
     public DcMotor cSMotor = null;
-    public DcMotor contMotor = null;
-    public CRServo scoop = null;
+    public Servo scoopMove = null;
+    public Servo scoop = null;
     public Servo scoopDoor = null;
     public Servo depositMove = null;
     public Servo depositBrace= null;
@@ -72,7 +71,6 @@ public class QueenLizzy26 {
         lRMotor = hwMap.get(DcMotor.class, "lRMotor");
         rRMotor = hwMap.get(DcMotor.class, "rRMotor");
         cSMotor = hwMap.get(DcMotor.class, "cSMotor");
-        contMotor = hwMap.get(DcMotor.class, "contMotor");
 
         // Defines the directions the motors will spin
         lFMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -91,7 +89,8 @@ public class QueenLizzy26 {
         rRMotor.setPower(0.0);
         lRMotor.setPower(0.0);
         cSMotor.setPower(0.0);
-        contMotor.setPower(0.0);
+
+
 
         // Stop and reset encoders
         resetEncoders();
@@ -103,7 +102,7 @@ public class QueenLizzy26 {
         lRMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rRMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         cSMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        contMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
         // Define and initialize sensors
         imu = hwMap.get(BNO055IMU.class, "imu");
@@ -112,15 +111,19 @@ public class QueenLizzy26 {
         imu.initialize(parameters);
 
         // Define and initialize sensors
-        scoop = hwMap.get(CRServo.class, "scoop");
-
+        scoop = hwMap.get(Servo.class, "scoop");
+        scoopMove = hwMap.get(Servo.class, "scoopMove");
         scoopDoor = hwMap.get(Servo.class,"scoopDoor");
         depositBrace = hwMap.get(Servo.class, "depositBrace");
         depositDoor = hwMap.get(Servo.class, "depositDoor");
         depositMove = hwMap.get(Servo.class, "depositMove");
 
 
+
         // Set all servos to zero
+
+        scoop.setPosition(0.5);
+        scoopMove.setPosition(0.0);
         scoopDoor.setPosition(0.0);
         depositMove.setPosition(0.0);
         depositDoor.setPosition(0.0);
@@ -380,86 +383,20 @@ public class QueenLizzy26 {
     //
     //**********************************************************************************************
 
-    //**********************************************************************************************
-    //
-    // CONTINGENCY MOTOR METHODS
-    //
-    //**********************************************************************************************
-    /**
-     * This method will set the power for the contingency motor
-     *
-     * @param contingency power setting for the contingency motor
-     */
-    public void setContingencyMotorPower(double contingency) {
 
-        contMotor.setPower(contingency);
-
-
-    }
-    /**
-     * Sets the target encoder value for the contingency motor
-     ** @param encoderPosition
-     */
-    public void setContMotorTargetPosition(int encoderPosition){
-        contMotor.setTargetPosition(encoderPosition);
-
-    }
-
-    /**
-     * This method will set the mode of the contingency motor to run using encoder
-     */
-    public void contRunWithEncoders() {
-
-        contMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-
-    /**
-     * This method will set the mode of the contingency motor to RUN_TO_POSITION
-     */
-    public void contRunWithEncodersSTP() {
-        contMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-    }
-
-    /**
-     * This method will set the mode of the contingency motor to run without encoder
-     */
-    public void contRunWithoutEncoders() {
-
-        contMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-    }
-
-    /**
-     * This will set the mode of the contingency train motor to STOP_AND_RESET_ENCODER, which will zero
-     * the encoder count but also set the motor into a RUN_WITHOUT_ENCODER mode
-     */
-    public void contResetEncoders() {
-
-        contMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-    }
-
-    /**
-     * These methods will get individual encoder position from the contingency motor
-     * @return the encoder position
-     */
-    public double getContSMotorDriveEncoderCounts() { return contMotor.getCurrentPosition(); }
-
-    //**********************************************************************************************
-    //
-    // END Contingency MOTOR METHODS
-    //
-    //**********************************************************************************************
     //**********************************************************************************************
     //
     // FREIGHT HANDLING SERVOS METHODS
     //
     //**********************************************************************************************
     public void  setScoopDirection() {
-        scoop.setDirection(CRServo.Direction.FORWARD);
+        scoop.setDirection(Servo.Direction.FORWARD);
 }
-    public void  setScoopDoorDirection() {scoopDoor.setDirection(Servo.Direction.FORWARD);
+    public void setScoopMoveDirection(){
+        scoop.setDirection(Servo.Direction.FORWARD);
+    }
+    public void  setScoopDoorDirection() {
+        scoopDoor.setDirection(Servo.Direction.FORWARD);
 }
     public void  setDepositMoveDirection() {
         depositMove.setDirection(Servo.Direction.FORWARD);
@@ -468,6 +405,7 @@ public class QueenLizzy26 {
         depositBrace.setDirection(Servo.Direction.FORWARD);
 }
     public void  setDepositDoorDirection() {
+
         depositDoor.setDirection(Servo.Direction.FORWARD);
 }
 
@@ -483,6 +421,7 @@ public class QueenLizzy26 {
     // IMU METHODS
     //
     //**********************************************************************************************
+
     /**
      * Gets the current heading from the IMU
      * @return current heading in degrees
