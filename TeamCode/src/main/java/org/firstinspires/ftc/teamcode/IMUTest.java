@@ -121,7 +121,8 @@ public class IMUTest extends LinearOpMode
         // Acquiring the angles is relatively expensive; we don't want
         // to do that in each of the three items that need that info, as that's
         // three times the necessary expense.
-        angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        //angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.YZX, AngleUnit.DEGREES);
         gravity  = imu.getGravity();
         });
 
@@ -130,9 +131,9 @@ public class IMUTest extends LinearOpMode
             .addData("calib", () -> imu.getCalibrationStatus().toString());
 
         telemetry.addLine()
-            .addData("heading", () -> formatAngle(angles.angleUnit, angles.firstAngle))
-            .addData("roll", () -> formatAngle(angles.angleUnit, angles.secondAngle))
-            .addData("pitch", () -> formatAngle(angles.angleUnit, angles.thirdAngle));
+            .addData("heading (Z)", () -> formatAngle(angles.angleUnit, angles.firstAngle))
+            .addData("roll (Y)", () -> formatAngle(angles.angleUnit, angles.secondAngle))
+            .addData("pitch (X) ", () -> formatAngle(angles.angleUnit, angles.thirdAngle));
 
         telemetry.addLine()
             .addData("grvty", () -> gravity.toString())

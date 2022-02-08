@@ -2,6 +2,7 @@ package RoboRaiders.Auto;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import RoboRaiders.PID.PidUdpReceiver;
@@ -9,7 +10,7 @@ import RoboRaiders.PID.RoboRaidersPID;
 import RoboRaiders.Robot.TestRobot;
 
 @Autonomous
-//@Disabled
+@Disabled
 
 public class pidauto extends LinearOpMode {
 
