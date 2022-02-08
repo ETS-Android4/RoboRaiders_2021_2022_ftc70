@@ -20,8 +20,8 @@ public class QueenLizzy26 {
     public DcMotor lRMotor = null;
     public DcMotor rRMotor = null;
     public DcMotor cSMotor = null;
-    public Servo scoop = null;
     public Servo scoopMove = null;
+    public Servo scoop = null;
     public Servo scoopDoor = null;
     public Servo depositMove = null;
     public Servo depositBrace= null;
@@ -90,6 +90,8 @@ public class QueenLizzy26 {
         lRMotor.setPower(0.0);
         cSMotor.setPower(0.0);
 
+
+
         // Stop and reset encoders
         resetEncoders();
 
@@ -100,6 +102,7 @@ public class QueenLizzy26 {
         lRMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rRMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         cSMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
         // Define and initialize sensors
         imu = hwMap.get(BNO055IMU.class, "imu");
@@ -116,13 +119,15 @@ public class QueenLizzy26 {
         depositMove = hwMap.get(Servo.class, "depositMove");
 
 
+
         // Set all servos to zero
-        scoop.setPosition(0.0);
-        scoopDoor.setPosition(0.0);
+
+        scoop.setPosition(0.5);
         scoopMove.setPosition(0.0);
+        scoopDoor.setPosition(0.0);
         depositMove.setPosition(0.0);
         depositDoor.setPosition(0.0);
-        depositBrace.setPosition(0.0);
+        depositBrace.setPosition(1.0);
     }
 
 
@@ -377,6 +382,8 @@ public class QueenLizzy26 {
     // END CAROUSEL MOTOR METHODS
     //
     //**********************************************************************************************
+
+
     //**********************************************************************************************
     //
     // FREIGHT HANDLING SERVOS METHODS
@@ -385,9 +392,9 @@ public class QueenLizzy26 {
     public void  setScoopDirection() {
         scoop.setDirection(Servo.Direction.FORWARD);
 }
-    public void  setScoopMoveDirection() {
-        scoopMove.setDirection(Servo.Direction.FORWARD);
-}
+    public void setScoopMoveDirection(){
+        scoop.setDirection(Servo.Direction.FORWARD);
+    }
     public void  setScoopDoorDirection() {
         scoopDoor.setDirection(Servo.Direction.FORWARD);
 }
@@ -398,6 +405,7 @@ public class QueenLizzy26 {
         depositBrace.setDirection(Servo.Direction.FORWARD);
 }
     public void  setDepositDoorDirection() {
+
         depositDoor.setDirection(Servo.Direction.FORWARD);
 }
 
@@ -413,6 +421,7 @@ public class QueenLizzy26 {
     // IMU METHODS
     //
     //**********************************************************************************************
+
     /**
      * Gets the current heading from the IMU
      * @return current heading in degrees

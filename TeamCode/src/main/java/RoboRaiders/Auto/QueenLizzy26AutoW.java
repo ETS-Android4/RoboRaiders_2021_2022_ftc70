@@ -74,11 +74,10 @@ public class QueenLizzy26AutoW extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
        // while (opModeIsActive()) {
-
             //Strafe over to carousel
             stevesRobot.resetEncoders();
             stevesRobot.runWithEncoders();
-            numofticks = stevesRobot.driveTrainCalculateCounts(7.4);
+            numofticks = stevesRobot.driveTrainCalculateCounts(20.0);
             stevesRobot.runWithEncoders();
             stevesRobot.setDriveMotorPower(.30, -.30, -.30, .30);
 
@@ -147,7 +146,7 @@ public class QueenLizzy26AutoW extends LinearOpMode {
         telemetry.addData("setting power to zero", true);
         */
 
-        //Strafe into wall to correct direction
+      /*  //Strafe into wall to correct direction
         stevesRobot.resetEncoders();
         stevesRobot.runWithEncoders();
         numofticks = stevesRobot.driveTrainCalculateCounts(12.0);
@@ -160,14 +159,14 @@ public class QueenLizzy26AutoW extends LinearOpMode {
             telemetry.update();
         }
         stevesRobot.setDriveMotorPower(0, 0, 0, 0);
-        telemetry.addData("setting power to zero", true);
+        telemetry.addData("setting power to zero", true);*/
 
 
 
         //Strafe out from wall
         stevesRobot.resetEncoders();
         stevesRobot.runWithEncoders();
-        numofticks = stevesRobot.driveTrainCalculateCounts(14.0);
+        numofticks = stevesRobot.driveTrainCalculateCounts(7.0);
         stevesRobot.runWithEncoders();
         stevesRobot.setDriveMotorPower(.30, -.30, -.30, .30);
 
