@@ -56,7 +56,11 @@ import RoboRaiders.Robot.QueenLizzy26;
 //**********************************************************************************************
 // END OF PSEUDOCODE
 
+<<<<<<< HEAD
 @Autonomous(name="QueenLizzy26AutoW")
+=======
+@Autonomous(name="aLeftBlueQueenLizzy26")
+>>>>>>> origin/master
 //@Disabled
 public class aLeftBlueQueenLizzy26 extends LinearOpMode {
     public QueenLizzy26 stevesRobot;
@@ -78,4 +82,8 @@ public class aLeftBlueQueenLizzy26 extends LinearOpMode {
 
 
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/master

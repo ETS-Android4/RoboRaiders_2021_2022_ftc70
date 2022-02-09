@@ -225,7 +225,7 @@ public class QueenLizzy26Teleop extends OpMode {
             telemetry.addLine().addData("the DEPOSIT servo is ", robot.depositMove);
             telemetry.addLine().addData("the BRACE servo is ", robot.depositBrace);
 
-        }
+    }
 
 
 

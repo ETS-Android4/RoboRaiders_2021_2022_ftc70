@@ -121,7 +121,9 @@ public class tensorflowtest extends LinearOpMode {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
+            //tfod.setZoom(1.25, 16.0/9.0);
             tfod.setZoom(1.25, 16.0/9.0);
+
         }
 
         /** Wait for the game to begin */

@@ -13,7 +13,7 @@ import RoboRaiders.Robot.TestRobot;
 //@Disabled
 
 public class QL26MotorTest extends LinearOpMode {
-   public double power = .20;
+    double power = 0.20;
 
 
 
@@ -41,7 +41,8 @@ public class QL26MotorTest extends LinearOpMode {
             // Wait for start to be pushed
             waitForStart();
             robot.runWithEncoders();
-            robot.setDriveMotorPower(power, power, power, power);
+            robot.setDriveMotorPower(-power, power, -power, power);
+            robot.setDriveMotorPower(power,power,power,power);
 
             while (opModeIsActive()) {
 
@@ -49,6 +50,7 @@ public class QL26MotorTest extends LinearOpMode {
                 telemetry.addLine().addData("Back Right Encoder Count: ", robot.getBackRightDriveEncoderCounts());
                 telemetry.addLine().addData("Front Left Encoder Count: ", robot.getFrontLeftDriveEncoderCounts());
                 telemetry.addLine().addData("Front Right Encoder Count: ", robot.getFrontRightDriveEncoderCounts());
+                telemetry.addLine().addData("Power applied: ", power);
                 telemetry.update();
             }
             robot.setDriveMotorPower(0, 0, 0, 0);
