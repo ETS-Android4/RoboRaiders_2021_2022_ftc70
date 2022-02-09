@@ -51,20 +51,14 @@ import RoboRaiders.Robot.QueenLizzy26;
 // START OF PSEUDOCODE
 //**********************************************************************************************
 
-<<<<<<< HEAD
 //position arm, then move to shipping hub, then drop preload box, park in warehouse
-=======
-//do the duck first, then position arm, then move to shipping hub, then drop preload box, park in team shipping unit
->>>>>>> origin/master
 
 //**********************************************************************************************
 // END OF PSEUDOCODE
 
-<<<<<<< HEAD
-@Autonomous(name="QueenLizzy26AutoW")
-=======
-@Autonomous(name="aRightRedQueenLizzy26")
->>>>>>> origin/master
+
+
+@Autonomous(name="RightRed")
 //@Disabled
 public class aRightRedQueenLizzy26 extends LinearOpMode {
     public QueenLizzy26 stevesRobot;
@@ -85,8 +79,5 @@ public class aRightRedQueenLizzy26 extends LinearOpMode {
         waitForStart();
 
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/master
+

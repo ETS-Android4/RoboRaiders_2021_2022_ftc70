@@ -65,7 +65,7 @@ import RoboRaiders.Robot.QueenLizzy26;
 // END OF TO-DO
 
 
-@Autonomous(name="QueenLizzy26AutoW")
+@Autonomous(name="LeftRed")
 //@Disabled
 public class aLeftRedQueenLizzy26 extends LinearOpMode {
     public QueenLizzy26 stevesRobot;

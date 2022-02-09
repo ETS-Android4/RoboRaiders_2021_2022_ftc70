@@ -51,15 +51,9 @@ import RoboRaiders.Robot.QueenLizzy26;
 // START OF KEEP IN MIND
 //**********************************************************************************************
 
-<<<<<<< HEAD
     //The Front of the robot is the intake side
     //the back of the robot is the deposit side
     //the left and right sides are determined when looking the direction of the robot (the way the front of the robot is looking)
-=======
-//The Front of the robot is the intake side
-//the back of the robot is the deposit side
-//the left and right sides are determined when looking the direction of the robot (the way the front of the robot is looking)
->>>>>>> origin/master
 
 //**********************************************************************************************
 // END OF KEEP IN MIND
@@ -69,11 +63,7 @@ import RoboRaiders.Robot.QueenLizzy26;
 // START OF PROGRAM
 //**********************************************************************************************
 
-<<<<<<< HEAD
-@Autonomous(name="QueenLizzy26AutoW")
-=======
 @Autonomous(name="EXAMPLE")
->>>>>>> origin/master
 //@Disabled
 public class EXAMPLE extends LinearOpMode {
     public QueenLizzy26 stevesRobot;
@@ -101,9 +91,9 @@ public class EXAMPLE extends LinearOpMode {
 
         // EXAMPLE
         //**********************************************************************************************
+
         // DRIVE FORWARD
 
-<<<<<<< HEAD
             stevesRobot.resetEncoders();
             stevesRobot.runWithEncoders();
             numofticks = stevesRobot.driveTrainCalculateCounts(1);
@@ -114,14 +104,6 @@ public class EXAMPLE extends LinearOpMode {
             }
 
             stevesRobot.setDriveMotorPower(0, 0, 0, 0);
-=======
-        stevesRobot.resetEncoders();
-        stevesRobot.runWithEncoders();
-        numofticks = stevesRobot.driveTrainCalculateCounts(1);
-        stevesRobot.setDriveMotorPower(-1, 1, -1, 1);
-        stevesRobot.setDriveMotorPower(0, 0, 0, 0);
->>>>>>> origin/master
-
 
         //**********************************************************************************************
         // END OF EXAMPLE
@@ -130,19 +112,12 @@ public class EXAMPLE extends LinearOpMode {
         // STRAFE
         //**********************************************************************************************
 
-<<<<<<< HEAD
-            //Strafe Left
-            stevesRobot.setDriveMotorPower(.30, -.30, -.30, .30);
-
-            //Strafe Right
-            stevesRobot.setDriveMotorPower(-.30, .30, .30, -.30);
-=======
         //Strafe Left
         stevesRobot.setDriveMotorPower(.30, -.30, -.30, .30);
 
         //Strafe Right
         stevesRobot.setDriveMotorPower(-.30, .30, .30, -.30);
->>>>>>> origin/master
+
 
         //**********************************************************************************************
         // END OF STRAFE
@@ -152,19 +127,12 @@ public class EXAMPLE extends LinearOpMode {
         // TURN
         //**********************************************************************************************
 
-<<<<<<< HEAD
-            //Turn right
-            stevesRobot.setDriveMotorPower(.50, .50, .50, .50);
-
-            //Turn left
-            stevesRobot.setDriveMotorPower(-.50, -.50, -.50, -.50);
-=======
         //Turn right
         stevesRobot.setDriveMotorPower(.50, .50, .50, .50);
 
         //Turn left
         stevesRobot.setDriveMotorPower(-.50, -.50, -.50, -.50);
->>>>>>> origin/master
+
 
         //**********************************************************************************************
         // END OF TURN
@@ -174,19 +142,12 @@ public class EXAMPLE extends LinearOpMode {
         // DRIVE
         //**********************************************************************************************
 
-<<<<<<< HEAD
-            //Drive forward
-            stevesRobot.setDriveMotorPower(-1, 1, -1, 1);
-
-            //Drive backward
-            stevesRobot.setDriveMotorPower(1, -1, 1, -1);
-=======
         //Drive forward
         stevesRobot.setDriveMotorPower(-1, 1, -1, 1);
 
         //Drive backward
         stevesRobot.setDriveMotorPower(1, -1, 1, -1);
->>>>>>> origin/master
+
 
         //**********************************************************************************************
         // END OF DRIVE
@@ -194,21 +155,12 @@ public class EXAMPLE extends LinearOpMode {
         // CARROUSEL
         //**********************************************************************************************
 
-<<<<<<< HEAD
             //spin carrousel motor counter clockwise
             stevesRobot.csRunWithoutEncoders();
             stevesRobot.setCarouselMotorPower(-.55);
 
             //the amount of time it takes to spin a duck on the carrousel
             sleep(4000);
-=======
-        //spin carrousel motor counter clockwise
-        stevesRobot.csRunWithoutEncoders();
-        stevesRobot.setCarouselMotorPower(-.55);
-
-        //the amount of time it takes to spin a duck on the carrousel
-        sleep(4000);
->>>>>>> origin/master
 
         //**********************************************************************************************
         // END OF CARROUSEL
@@ -217,17 +169,6 @@ public class EXAMPLE extends LinearOpMode {
         // OTHER
         //**********************************************************************************************
 
-<<<<<<< HEAD
-            //Display Encoder Count
-            while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks) {
-
-                telemetry.addData("number of ticks: ", stevesRobot.getSortedEncoderCount());
-                telemetry.update();
-            }
-
-            //Set motor power to zero
-            stevesRobot.setDriveMotorPower(0, 0, 0, 0);
-=======
         //Display Encoder Count
         while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks) {
 
@@ -237,7 +178,6 @@ public class EXAMPLE extends LinearOpMode {
 
         //Set motor power to zero
         stevesRobot.setDriveMotorPower(0, 0, 0, 0);
->>>>>>> origin/master
 
         //**********************************************************************************************
         // END OF OTHER
