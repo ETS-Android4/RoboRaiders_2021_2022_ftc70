@@ -97,6 +97,11 @@ public class EXAMPLE extends LinearOpMode {
             stevesRobot.runWithEncoders();
             numofticks = stevesRobot.driveTrainCalculateCounts(1);
             stevesRobot.setDriveMotorPower(-1, 1, -1, 1);
+
+            while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks){
+                sleep(1);
+            }
+
             stevesRobot.setDriveMotorPower(0, 0, 0, 0);
 
 

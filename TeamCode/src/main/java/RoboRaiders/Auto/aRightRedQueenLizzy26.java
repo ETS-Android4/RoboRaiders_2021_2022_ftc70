@@ -51,7 +51,7 @@ import RoboRaiders.Robot.QueenLizzy26;
 // START OF PSEUDOCODE
 //**********************************************************************************************
 
-    //do the duck first, then position arm, then move to shipping hub, then drop preload box, park in team shipping unit
+//position arm, then move to shipping hub, then drop preload box, park in warehouse
 
 //**********************************************************************************************
 // END OF PSEUDOCODE

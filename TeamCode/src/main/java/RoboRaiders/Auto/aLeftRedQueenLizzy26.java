@@ -51,10 +51,19 @@ import RoboRaiders.Robot.QueenLizzy26;
 // START OF PSEUDOCODE
 //**********************************************************************************************
 
-//position arm, then move to shipping hub, then drop preload box, park in warehouse
+    //do the duck first, then position arm, then move to shipping hub, then drop preload box, park in team storage unit
 
 //**********************************************************************************************
 // END OF PSEUDOCODE
+
+// START OF TO-DO
+//**********************************************************************************************
+
+    //check distances they could be off by alot
+
+//**********************************************************************************************
+// END OF TO-DO
+
 
 @Autonomous(name="QueenLizzy26AutoW")
 //@Disabled
@@ -75,6 +84,171 @@ public class aLeftRedQueenLizzy26 extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
+
+        //**********************************************************************************************
+
+        // strafe to carrousel
+
+        stevesRobot.resetEncoders();
+        stevesRobot.runWithEncoders();
+        numofticks = stevesRobot.driveTrainCalculateCounts(20);
+        stevesRobot.setDriveMotorPower(.10, -.10, -.10, .10);
+
+        while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks){
+            sleep(1);
+        }
+
+        stevesRobot.setDriveMotorPower(0, 0, 0, 0);
+
+        //**********************************************************************************************
+
+        // spin carrousel
+
+        stevesRobot.csRunWithoutEncoders();
+        stevesRobot.setCarouselMotorPower(-.55);
+
+        sleep(4000);
+
+        stevesRobot.setCarouselMotorPower(0);
+
+        //**********************************************************************************************
+
+        //maybe strafe into wall
+
+        //**********************************************************************************************
+
+        // drive forward
+
+        stevesRobot.resetEncoders();
+        stevesRobot.runWithEncoders();
+        numofticks = stevesRobot.driveTrainCalculateCounts(40);
+        stevesRobot.setDriveMotorPower(-.10, .10, -.10, .10);
+
+        while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks){
+            sleep(1);
+        }
+
+        stevesRobot.setDriveMotorPower(0, 0, 0, 0);
+
+        //**********************************************************************************************
+
+        //maybe strafe away from wall
+
+        //**********************************************************************************************
+
+        // move deposit to top level
+
+        stevesRobot.depositBrace.setPosition(0.71);
+        stevesRobot.depositMove.setPosition(0.73);
+
+        sleep(1000);
+
+        //**********************************************************************************************
+
+        // turn 90% so front faces wall
+
+        stevesRobot.resetEncoders();
+        stevesRobot.runWithEncoders();
+        numofticks = stevesRobot.driveTrainCalculateCounts(10);
+        stevesRobot.setDriveMotorPower(-.10, -.10, -.10, -.10);
+
+        while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks){
+            sleep(1);
+        }
+
+        stevesRobot.setDriveMotorPower(0, 0, 0, 0);
+
+        //**********************************************************************************************
+
+        // move backward to shipping hub
+
+        stevesRobot.resetEncoders();
+        stevesRobot.runWithEncoders();
+        numofticks = stevesRobot.driveTrainCalculateCounts(40);
+        stevesRobot.setDriveMotorPower(.10, -.10, .10, -.10);
+
+        while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks){
+            sleep(1);
+        }
+
+        stevesRobot.setDriveMotorPower(0, 0, 0, 0);
+
+        //**********************************************************************************************
+
+        // open deposit - close deposit - return deposit to home position
+
+        stevesRobot.depositDoor.setPosition(1.0);
+
+        sleep(2000);
+
+        stevesRobot.depositDoor.setPosition(0);
+
+        stevesRobot.depositBrace.setPosition(1.0);
+        stevesRobot.depositMove.setPosition(0.0);
+
+        sleep(1000);
+
+        //**********************************************************************************************
+
+        // drive forward away from shipping unit
+
+        stevesRobot.resetEncoders();
+        stevesRobot.runWithEncoders();
+        numofticks = stevesRobot.driveTrainCalculateCounts(40);
+        stevesRobot.setDriveMotorPower(-.10, .10, -.10, .10);
+
+        while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks){
+            sleep(1);
+        }
+
+        stevesRobot.setDriveMotorPower(0, 0, 0, 0);
+
+        //**********************************************************************************************
+
+        // turn to park
+
+        stevesRobot.resetEncoders();
+        stevesRobot.runWithEncoders();
+        numofticks = stevesRobot.driveTrainCalculateCounts(10);
+        stevesRobot.setDriveMotorPower(-.10, -.10, -.10, -.10);
+
+        while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks){
+            sleep(1);
+        }
+
+        stevesRobot.setDriveMotorPower(0, 0, 0, 0);
+
+        //**********************************************************************************************
+
+        // strafe into wall
+
+        stevesRobot.resetEncoders();
+        stevesRobot.runWithEncoders();
+        numofticks = stevesRobot.driveTrainCalculateCounts(20);
+        stevesRobot.setDriveMotorPower(-.10, .10, .10, -.10);
+
+        while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks){
+            sleep(1);
+        }
+
+        stevesRobot.setDriveMotorPower(0, 0, 0, 0);
+
+        //**********************************************************************************************
+
+        // drive forward to park
+
+        stevesRobot.resetEncoders();
+        stevesRobot.runWithEncoders();
+        numofticks = stevesRobot.driveTrainCalculateCounts(20);
+        stevesRobot.setDriveMotorPower(-.10, .10, -.10, .10);
+
+        while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks){
+            sleep(1);
+        }
+
+        stevesRobot.setDriveMotorPower(0, 0, 0, 0);
+
+        //**********************************************************************************************
 
     }
 }
