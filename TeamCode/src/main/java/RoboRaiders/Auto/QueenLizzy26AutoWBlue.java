@@ -49,9 +49,9 @@ import java.time.Duration;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="QueenLizzy26AutoW")
+@Autonomous(name="QueenLizzy26AutoWBlue")
 //@Disabled
-public class QueenLizzy26AutoW extends LinearOpMode {
+public class QueenLizzy26AutoWBlue extends LinearOpMode {
     public QueenLizzy26 stevesRobot;
     double numofticks;
 
@@ -73,47 +73,52 @@ public class QueenLizzy26AutoW extends LinearOpMode {
         waitForStart();
 
         // run until the end of the match (driver presses STOP)
-       // while (opModeIsActive()) {
-            //Strafe over to carousel
-            stevesRobot.resetEncoders();
-            stevesRobot.runWithEncoders();
-            numofticks = stevesRobot.driveTrainCalculateCounts(20.0);
-            stevesRobot.runWithEncoders();
-            stevesRobot.setDriveMotorPower(.30, -.30, -.30, .30);
+        // while (opModeIsActive()) {
+//        stevesRobot.resetEncoders();
+//        stevesRobot.runWithEncoders();
+//        numofticks = stevesRobot.driveTrainCalculateCounts(0.1);
+//        stevesRobot.runWithEncoders();
+//        stevesRobot.setDriveMotorPower(-.20, .20, .30, -.30);       //strafe
 
-            while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks) {
+        sleep(1000);
+        stevesRobot.resetEncoders();
+        stevesRobot.runWithEncoders();
+        numofticks = stevesRobot.driveTrainCalculateCounts(50.0);
+        stevesRobot.setDriveMotorPower(-1, 1, -1, 1);
 
-                telemetry.addData("number of ticks: ", stevesRobot.getSortedEncoderCount());
-                telemetry.update();
-            }
-            stevesRobot.setDriveMotorPower(0, 0, 0, 0);
-            telemetry.addData("setting power to zero", true);
-
-            //Spin carousel to remove duck
-            stevesRobot.csRunWithoutEncoders();
-            stevesRobot.setCarouselMotorPower(-.55);
-
-            sleep(4000);
-
-            stevesRobot.setCarouselMotorPower(0.0);
-            telemetry.addData("setting power to zero", true);
-       // }
+//        while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks) {
 //
-//            //Original code to drive to storage unit
-//            /**stevesRobot.resetEncoders();
-//            stevesRobot.runWithEncoders();
-//            numofticks = stevesRobot.driveTrainCalculateCounts(20.0);
-//            stevesRobot.setDriveMotorPower(-.50, .50, -.50, .50);
+//            telemetry.addData("number of ticks: ", stevesRobot.getSortedEncoderCount());
+//            telemetry.update();
+//        }
+//        stevesRobot.setDriveMotorPower(0, 0, 0, 0);
+//        telemetry.addData("setting power to zero", true);
 //
-//            while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks) {
+//        //Spin carousel to remove duck
+//        stevesRobot.csRunWithoutEncoders();
+//        stevesRobot.setCarouselMotorPower(-.55);
 //
-//                telemetry.addData("number of ticks: ", stevesRobot.getSortedEncoderCount());
-//                telemetry.addData("number of ticks", numofticks);
-//                telemetry.update();
-//            }
-//            stevesRobot.setDriveMotorPower(0, 0, 0, 0);
-//             telemetry.addData("setting power to zero", true);
-//             */
+//        sleep(4000);
+//
+//        stevesRobot.setCarouselMotorPower(0.0);
+//        telemetry.addData("setting power to zero", true);
+//        // }
+//
+//        //Original code to drive to storage unit
+//        /**stevesRobot.resetEncoders();
+//         stevesRobot.runWithEncoders();
+//         numofticks = stevesRobot.driveTrainCalculateCounts(20.0);
+//         stevesRobot.setDriveMotorPower(-.50, .50, -.50, .50);
+//
+//         while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks) {
+//
+//         telemetry.addData("number of ticks: ", stevesRobot.getSortedEncoderCount());
+//         telemetry.addData("number of ticks", numofticks);
+//         telemetry.update();
+//         }
+//         stevesRobot.setDriveMotorPower(0, 0, 0, 0);
+//         telemetry.addData("setting power to zero", true);
+//         */
 //
 //        //Turn 90 degrees
 //        stevesRobot.setDriveMotorPower(.50, .50, .50, .50);
@@ -129,22 +134,22 @@ public class QueenLizzy26AutoW extends LinearOpMode {
 //        //Strafe away from carousel
 //
 //        /**stevesRobot.resetEncoders();
-//        stevesRobot.runWithEncoders();
-//        numofticks = stevesRobot.driveTrainCalculateCounts(7.2);
-//        stevesRobot.runWithEncoders();
-//        stevesRobot.setDriveMotorPower(.30, -.30, -.30, .30);
+//         stevesRobot.runWithEncoders();
+//         numofticks = stevesRobot.driveTrainCalculateCounts(7.2);
+//         stevesRobot.runWithEncoders();
+//         stevesRobot.setDriveMotorPower(.30, -.30, -.30, .30);
 //
-//        while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks) {
+//         while (opModeIsActive() && stevesRobot.getSortedEncoderCount() <= numofticks) {
 //
-//            telemetry.addData("number of ticks: ", stevesRobot.getSortedEncoderCount());
-//            telemetry.update();
-//        }
-//        stevesRobot.setDriveMotorPower(0, 0, 0, 0);
-//        telemetry.addData("setting power to zero", true);
+//         telemetry.addData("number of ticks: ", stevesRobot.getSortedEncoderCount());
+//         telemetry.update();
+//         }
+//         stevesRobot.setDriveMotorPower(0, 0, 0, 0);
+//         telemetry.addData("setting power to zero", true);
 //
-//        stevesRobot.setCarouselMotorPower(0.0);
-//        telemetry.addData("setting power to zero", true);
-//        */
+//         stevesRobot.setCarouselMotorPower(0.0);
+//         telemetry.addData("setting power to zero", true);
+//         */
 //
 //      /*  //Strafe into wall to correct direction
 //        stevesRobot.resetEncoders();
